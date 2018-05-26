@@ -144,6 +144,7 @@ $(document).ready(function(){
 	
 	//添加小区
 	$(".vla-add").click(function(){
+		addInit();
 		$(".shade").show();
 		$(".vla-addth").show();
 	});
@@ -187,8 +188,13 @@ $(document).ready(function(){
 			alert("文件格式错误！");
 		}
 		else{
+			var vlaName;
+			vlaName=$("#province1 option:selected").val()+$("#city1 option:selected").val()+$("#district1 option:selected").val()+$(".vla-name input").val();
+			var data=new FormData();
+			data.append("commu_name",vlaName);
+			data.append("pic",$("#vla-upfile")[0].files[0]);
 			$.ajax({  
-				url: '../../register.php',  
+				url: '../register.php',  
 				type: 'POST',  
 				data: data,
 				cache: false,  
