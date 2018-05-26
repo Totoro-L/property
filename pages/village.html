@@ -1,0 +1,57 @@
+<div class="vla-title">
+	<span class="vla-choose">审核状态：<select>
+		<option>全部</option>
+		<option>审核成功</option>
+		<option>审核中</option>
+		<option>审核失败</option>
+	</select></span>
+	<span class="vla-check"><input type="text" placeholder="/搜索小区名称"/><a href="#"><img src="images/u118.png" width="28px" height="28px"></a></span>
+	<button class="vla-add" type="button">添加小区</button>
+</div>
+<table id="vla">
+</table>
+<div class="vla-bottom">
+	<button type="button" id="vla-first-page" class="vla-paging">首页</button>
+	<button type="button" id="vla-last-page" class="vla-paging">上一页</button>
+	<span class="vla-pag-div">
+		<input type="button" value="1" class="vla-pag"/>
+		<input type="button" value="2" class="vla-pag"/>
+		<input type="button" value="3" class="vla-pag"/>
+		<input type="button" value="4" class="vla-pag"/>
+		<input type="button" value="5" class="vla-pag"/>
+	</span>
+	<button type="button" id="vla-next-page" class="vla-paging">下一页</button>
+	<button type="button" id="vla-final-page" class="vla-paging">末页</button>
+	<span class="vla-bottom-del"></span>
+</div>
+<div class="vla-addth">
+	<h1>添加小区</h1>
+	<div id="add-vla">
+		<div class="vla-name">小区名称：<input type="text"/></div>
+		<p>所在地区：</p>
+		<div class="form-inline">
+		  <div data-toggle="distpicker">
+			<span class="form-group">
+			  <select class="form-control" id="province1"></select>省
+			</span>
+			<span class="form-group">
+			  <select class="form-control" id="city1"></select>市
+			</span>
+			<span class="form-group">
+			  <select class="form-control" id="district1"></select>区
+			</span>
+			</div>
+		</div>
+		<div class="vla-filediv">上传小区凭证：
+			<input id="vla-upfile" type="file"/>
+			<div id="vla-upbtn"><button type="button">上传附件</button><span></span></div>
+		</div>
+		<div class="vla-btn">
+			<button type="button" class="vla-btn1">退出</button>
+			<button type="button" class="vla-btn2">提交</button>
+		</div>
+	</div>
+</div>
+<script src="js/distpicker.data.js"></script>
+<script src="js/distpicker.js"></script>
+<script src="js/pages-js/village.js"></script>

@@ -1,0 +1,148 @@
+/* 注册 */
+html,body{
+	width:100%;
+	height:100%;
+	padding:0;
+	margin:0;
+}
+body{
+	overflow:hidden;
+	background:url("../images/u1.jpg") no-repeat center center;
+	-webkit-background-size:cover;
+}
+.wrapper{
+	width:1100px;
+	height:480px;
+	border:none;
+	border-top:3px solid white;
+	margin:0 auto;
+	text-align:center;
+}
+h1,.back{
+	display:inline-block;
+	color:white;
+	margin-bottom:10px;
+	margin-top:40px;
+}
+h1{
+	margin-left:210px;
+	font-size:36px;
+}
+.back{
+	margin-left:600px;
+	font-size:18px;
+	cursor:pointer;
+}
+.regis-out{
+	vertical-align:middle;
+}
+ul{
+	padding:0;
+	margin:45px auto 0 auto;
+}
+li{
+	list-style-type:none;
+	display:inline-block;
+	font-size:18px;
+	width:230px;
+	height:70px;
+	color:white;
+	border-top:3px solid white;
+	line-height:0px;
+	margin:0;
+	padding:0;
+}
+li div{
+	background-color:white;
+	width:36px;
+	height:36px;
+	margin:0 auto;
+	color:#999;
+	position:relative;
+	top:-18px;
+	line-height:36px;
+	border-radius:36px;
+}
+/* 基本信息 */
+input{
+	width:300px;
+	height:35px;
+	font-size:16px;
+}
+.first p{
+	margin:0 0 20px 400px;
+	text-align:left;
+	position:relative;
+}
+.first p span{
+	font-size:13px;
+	color:white;
+	position:absolute;
+	top:10px;
+	left:310px;
+}
+button{
+	cursor:pointer;
+	width:140px;
+	height:40px;
+	background-color:#169bd5;
+	color:white;
+	border:none;
+	font-size:20px;
+	border-radius:5px;
+}
+.pass-eye{
+	position:absolute;
+	top:10px;
+	left:270px;
+	cursor:pointer;
+	display:none;
+}
+/* 上传凭证 */
+h2{
+	font-size:20px;
+	font-weight:normal;
+	color:white;
+}
+.second img{
+	display:block;
+	margin:30px auto;
+}
+.file-del{
+	font-size:12px;
+	color:white;
+	margin-top:30px;
+}
+.btn{
+	margin-top:42px;
+	letter-spacing: 35px;
+}
+.second img{
+	cursor:pointer;
+}
+/* 注册成功 */
+.third img{
+	display:block;
+	margin:30px auto;
+}
+.ok-del{
+	font-size:18px;
+	color:white;
+}
+
+
+.second,.third,.file-btn{
+	display:none;
+}
+
+
+
+
+.active1{
+	border-top:4px solid #169bd5;
+}
+.active2{
+	background-color:#169bd5;
+	color:white;
+}
+

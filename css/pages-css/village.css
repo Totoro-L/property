@@ -1,0 +1,202 @@
+/* 小区管理 */
+.vla-title{
+	margin:15px auto;
+}
+.vla-title span,.vla-title button{
+	display:inline-block;
+	margin-left:130px;
+}
+.vla-check input{
+	width:260px;
+	height:28px;
+	font-size:15px;
+}
+.vla-check img{
+	vertical-align:middle;
+	position:relative;
+	left:5px;
+}
+.vla-choose select{
+	width:110px;
+	height:25px;
+	font-size:15px;
+}
+.vla-title button{
+	width:140px;
+	height:40px;
+	border:none;
+	background-color:#336699;
+	font-size:18px;
+	color:white;
+}
+
+table{
+	margin-left:60px;
+	margin-top:22px;
+	border-collapse:collapse;
+	text-align:center;
+}
+th{
+	background-color:#4B99CB;
+	color:white;
+	font-weight:normal;
+	font-size:19px;
+}
+th,td{
+	padding:8px 50px;
+}
+td{
+	padding:7px 50px;
+	border:1px solid #797979;
+}
+td span{
+	display:inline-block;
+}
+td span:first-child{
+	margin-right:20px;
+}
+td span img{
+	vertical-align:middle;
+	position:relative;
+	right:2px;
+}
+.space{
+	border:none;
+}
+
+.vla-bottom{
+	position:absolute;
+	padding-left:400px;
+	top:610px;
+}
+.vla-bottom button,.vla-bottom span{
+	display:inline-block;
+	vertical-align:bottom;
+}
+.vla-bottom button{
+	border:none;
+}
+.vla-bottom-del{
+	margin-left:160px;
+	font-size:16px;
+}
+.vla-bottom .vla-paging{
+	height:28px;
+	background-color:#336699;
+	color:white;
+}
+.vla-paging-down{
+	height:28px;
+	background-color:#ccc;
+	color:white;
+}
+.vla-bottom .vla-pag{
+	width:28px;
+	height:28px;
+	background-color:white;
+	border:1px solid #797979;
+}
+.vla-bottom .vla-pag:hover{
+	background-color:#FFFFCC;
+}
+.vla-pag-div .vla-btn-active{
+	background-color:#4B99CB;
+	color:white;
+	width:28px;
+	height:28px;
+	border:1px solid #797979;
+}
+button{
+	cursor:pointer;
+}
+.vla-pag-div{
+	margin:auto 2px;
+	height:28px;
+	overflow:hidden;
+	width:159px;
+}
+
+.vla-addth{
+	position:absolute;
+	top:146px;
+	left:420px;
+	width:555px;
+	height:387px;
+	background-color:white;
+	z-index:20;
+	display:none;
+}
+.vla-addth h1{
+	font-size:28px;
+	color:#4b99cb;
+	margin:5px auto;
+	text-align:left;
+	width:480px;
+	padding-left:25px;
+	padding-bottom:8px;
+	padding-top:15px;
+	border-bottom:2px solid #4b99cb;
+}
+.vla-name{
+	padding-left:60px;
+	margin-top:22px;
+	font-size:18px;
+}
+.vla-name input{
+	width:260px;
+	height:30px;
+	font-size:16px;
+}
+#add-vla p{
+	margin:22px auto 12px 60px;
+	font-size:18px;
+}
+.form-inline{
+	padding-left:60px;
+	font-size:16px;
+}
+.form-inline select{
+	height:30px;
+	font-size:14px;
+}
+.vla-filediv{
+	margin-top:22px;
+	padding-left:60px;
+}
+#vla-upbtn{
+	margin-top:12px;
+	margin-left:20px;
+	
+}
+#vla-upbtn button{
+	width:82px;
+	height:28px;
+	background-color:#4b99cb;
+	color:white;
+	font-size:14px;
+	border:none;
+	border-radius:5px;
+}
+#vla-upbtn span{
+	font-size:14px;
+}
+.vla-btn{
+	margin-top:22px;
+	text-align:center;
+}
+.vla-btn button{
+	display:inline-block;
+	height:35px;
+	width:100px;
+	font-size:16px;
+	color:white;
+	background-color:#336699;
+	border:none;
+	border-radius:5px;
+}
+.vla-btn button:first-child{
+	margin-right:50px;
+}
+.vla-addth #vla-upfile{
+	display:none;
+}

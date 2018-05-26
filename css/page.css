@@ -1,0 +1,143 @@
+/* 物业管理母版 */
+html,body{
+	margin:0;
+	padding:0;
+	height:100%;
+	width:100%;
+}
+.top{
+	height:45px;
+	width:100%;
+	padding-top:11px;
+	background-color:#4B99CB;
+}
+.top h1{
+	color:white;
+	font-size:25px;
+}
+.top h1,.message,.top div{
+	float:left;
+}
+.top h1{
+	height:25px;
+	margin-top:2px;
+	margin-left:80px;
+}
+.message{
+	margin-top:14px;
+	margin-left:850px;
+}
+.top div{
+	margin-top:8px;
+	margin-left:40px;
+}
+.top .set-div{
+	margin-left:60px;
+}
+ul{
+	list-style-type:none;
+	padding:0;
+	margin:0;
+	text-align:center;
+}
+.nav,#main-frame{
+	float:left;
+}
+.nav{
+	margin-top:65px;
+	margin-left:40px;
+}
+.nav li{
+	width:115px;
+	background-color:#999;
+	color:white;
+	margin-top:14px;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+.nav li img{
+	vertical-align:middle;
+}
+#main-frame{
+	width:1155px;
+	height:570px;
+	border:1px solid #797979;
+	margin-top:30px;
+}
+.rec1,.rec2{
+	position:absolute;
+	width:0;
+	height:0;
+	top:20px;
+	left:1136px;
+	border-top:9px solid white;
+	border-left:8px solid transparent;
+	border-right:8px solid transparent;
+	cursor:pointer;
+	transition: transform 0.2s ease-in;
+}
+.rec2{
+	left:1217px;
+}
+.add,.set{
+	position:absolute;
+	top:50px;
+	border:1px solid #999;
+	background-color:white;
+	padding-top:10px;
+}
+.add{
+	width:120px;
+	left:1120px;
+}
+.set{
+	width:85px;
+	left:1215px;
+}
+.add li,.set li{
+	height:28px;
+}
+.add:before,.set:before{
+	content:' ';
+	position:absolute;
+	top:-9px;
+	left:55px;
+	border-bottom:9px solid white;
+	border-left:8px solid transparent;
+	border-right:8px solid transparent;
+}
+.set:before{
+	left:41px;
+}
+li:hover{
+	background-color:#4B99CB;
+}
+a,li{
+	cursor:pointer;
+}
+
+ul .active{
+	background-color:#336699;
+}
+.add,.set{
+	display:none;
+}
+
+.add-div:hover>.rec1{
+	transform: rotate(180deg);
+}
+.set-div:hover>.rec2{
+	transform: rotate(180deg);
+}
+/* 遮罩 */
+.shade{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background-color:#ccc;
+	z-index:10;
+	opacity:0.5;
+	display:none;
+}
