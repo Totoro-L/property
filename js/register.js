@@ -1,5 +1,10 @@
 $(document).ready(function(){
-	var Check=1;
+	var Check1=0;
+	var Check2=0;
+	var Check3=0;
+	var Check4=0;
+	var Check5=1;
+
 	$("li:first-child").addClass("active1");
 	$("li:first-child div").addClass("active2");
 	// 用户名
@@ -10,10 +15,11 @@ $(document).ready(function(){
 		var reg =/^[\da-zA-Z_\u4e00-\u9f5a]{4,10}$/;
 		if(reg.test($(".regis-user input").val())){       //输入正确
 			$(".regis-user span").html('<img src="images/right.png" height="25px" width="25px"/>');
+			Check1=1;
 		}
 		else{
 			$(".regis-user span").html('<img src="images/error.png" height="25px" width="25px"/>');
-			Check=0;
+			Check1=0;
 		}
 	});
 	// 密码
@@ -33,13 +39,14 @@ $(document).ready(function(){
 		}
 	});
 	$(".regis-pass input").blur(function(){
-		var reg =/^\w{6,16}$/;
+		var reg =/^\w{6,10}$/;
 		if(reg.test($(".regis-pass input").val())){       //输入正确
 			$(".regis-pass span").html('<img src="images/right.png" height="25px" width="25px"/>');
+			Check2=1;
 		}
 		else{
 			$(".regis-pass span").html('<img src="images/error.png" height="25px" width="25px"/>');
-			Check=0;
+			Check2=0;
 		}
 	});
 	// 联系电话
@@ -47,10 +54,11 @@ $(document).ready(function(){
 		var reg =/^1\d{10}$/;
 		if(reg.test($(".regis-call input").val())){       //输入正确
 			$(".regis-call span").html('<img src="images/right.png" height="25px" width="25px"/>');
+			Check3=1;
 		}
 		else{
 			$(".regis-call span").html('<img src="images/error.png" height="25px" width="25px"/>');
-			Check=0;
+			Check3=0;
 		}
 	});
 	// 邮箱
@@ -58,20 +66,21 @@ $(document).ready(function(){
 		var reg =/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
 		if(reg.test($(".regis-mail input").val())){       //输入正确
 			$(".regis-mail span").html('<img src="images/right.png" height="25px" width="25px"/>');
+			Check4=1;
 		}
 		else{
 			$(".regis-mail span").html('<img src="images/error.png" height="25px" width="25px"/>');
-			Check=0;
+			Check4=0;
 		}
 	});
 	// 第一个 下一步
 	$(".one-next").click(function(){
 		$(".first input").each(function(i,obj){
 			if(obj.value==""){
-				Check=0;
+				Check5=0;
 			}
 		});
-		if(Check==0){
+		if(!Check1 ||!Check2 ||!Check3 ||!Check4 ||!Check5){
 			alert("请输入完整正确的信息！");
 		}
 		else{

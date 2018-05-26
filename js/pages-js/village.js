@@ -193,41 +193,26 @@ $(document).ready(function(){
 			var data=new FormData();
 			data.append("commu_name",vlaName);
 			data.append("pic",$("#vla-upfile")[0].files[0]);
-			$.ajax({  
-				url: '../register.php',  
-				type: 'POST',  
-				data: data,
-				cache: false,  
-				processData: false,  
-				contentType: false,
-				error: function(XMLHttpRequest, textStatus, errorThrown) { 
-							 alert(XMLHttpRequest.status);
-							 alert(XMLHttpRequest.readyState);
-							 alert(textStatus); // paser error;
-						}
-			}).done(function(ret){  
-					var Repar=JSON.parse(ret);
-					var result=JSON.stringify(Repar.return);
-					var reg = new RegExp('"',"g"); 
-					result = result.replace(reg, "");
-					alert(result);
-					addInit();
-					if(result=='0'){
-						alert("提交成功");
-						$(".shade").hide();
-						$(".vla-addth").hide();
-						addInit();
-					}
-					else if(result=='1'){
-						alert('该用户名已被注册');
-					}
-					else if(result=='2'){
-						alert('该手机号已被注册');
-					}
-					else if(result=='3'){
-						alert('该邮箱已被注册');
-					}
-			})
+			$.ajax({
+				type: "POST",  //数据提交方式（post/get）
+				url: '../check.php',  //提交到的url
+				data: data,//提交的数据
+				dataType: "json",//返回的数据类型格式
+				cache: false,
+				processData: false,
+			    contentType: false,
+				success: function(){
+					alert("提交成功，请等待管理员审核！");
+					$(".shade").hide();
+					$(".vla-addth").hide();
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
+				}
+			});
+			return false;
 		}
 	});
 });

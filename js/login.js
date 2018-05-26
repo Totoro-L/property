@@ -66,8 +66,7 @@ $(document).ready(function(){
 						alert("验证码错误");
 					}
 					else if(result=='0'){
-						//window.location.href = "../../../user/user.html";
-						alert("登陆成功！");
+						window.location.href = "page.html";
 					}
 				},
 				error:function(XMLHttpRequest, textStatus, errorThrown){
