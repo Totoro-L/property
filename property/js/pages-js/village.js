@@ -38,21 +38,26 @@ function getData(currentPage){
 	};
 	getPush={
 		"jsonPage":getPush
-	}
+	};
+	var retPage;
+	$.ajaxSetup({  
+		async : false  
+	});
 	$.get("../commu.php",getPush,function(ret){
 		//alert("返回数据是："+ret);
 		// alert("总数据数是："+ret.ProNum);
 		// alert(ret.length);
-		alert("第一个审核状态是："+ret[0].status);
+		ret=JSON.stringify(ret);
+		ret=JSON.parse(ret);	
 		var tab="<tr><th>序号</th><th>小区名称</th><th>归属物业</th><th>审核状态</th><th>操作</th></tr><tr><td class=\"space\"></td></tr>";
 		var statusCec;
-		for(var i=0;i<ret.length;i++)
+		for(var i=0;i<ret.count-1;i++)
         {
-			if(ret[i].status=="0")
+			if(ret[i].status==0)
 			{
 				statusCec='审核中';
 			}
-			else if(ret[i].status=="1")
+			else if(ret[i].status==1)
 			{
 				statusCec='审核通过';
 			}
@@ -61,7 +66,7 @@ function getData(currentPage){
 				statusCec='审核失败';
 			}
             tab+="<tr>";
-			tab+="<td>"+i+"</td>";
+			tab+="<td>"+parseInt(i+1)+"</td>";
             tab+="<td>"+ret[i].commu_name+"</td>"+
 			     "<td>"+ret[i].user+"</td>"+
 				 "<td>"+statusCec+"</td>"+
@@ -73,44 +78,46 @@ function getData(currentPage){
 		$("tr:even").css("background-color","#ccc");
 		var total="共"+ret.PageNum+"页,"+ret.ProNum+"条数据";
 		$(".vla-bottom-del").html(total);
+		pageNow(currentPage,ret.PageNum);
+		
+		if(currentPage==1)
+		{
+			$("#vla-first-page").attr("class","vla-paging-down");
+			$("#vla-last-page").attr("class","vla-paging-down");
+			$("#vla-first-page").attr("disabled", true);
+			$("#vla-last-page").attr("disabled", true);
+			
+			$("#vla-final-page").attr("class","vla-paging");
+			$("#vla-next-page").attr("class","vla-paging");
+			$("#vla-final-page").attr("disabled", false);
+			$("#vla-next-page").attr("disabled", false);
+		}
+		else if(currentPage==ret.PageNum)
+		{
+			$("#vla-final-page").attr("class","vla-paging-down");
+			$("#vla-next-page").attr("class","vla-paging-down");
+			$("#vla-final-page").attr("disabled", true);
+			$("#vla-next-page").attr("disabled", true);
+			
+			$("#vla-first-page").attr("class","vla-paging");
+			$("#vla-last-page").attr("class","vla-paging");
+			$("#vla-first-page").attr("disabled", false);
+			$("#vla-last-page").attr("disabled", false);
+		}
+		else{
+			$("#vla-first-page").attr("class","vla-paging");
+			$("#vla-last-page").attr("class","vla-paging");
+			$("#vla-first-page").attr("disabled", false);
+			$("#vla-last-page").attr("disabled", false);
+			
+			$("#vla-final-page").attr("class","vla-paging");
+			$("#vla-next-page").attr("class","vla-paging");
+			$("#vla-final-page").attr("disabled", false);
+			$("#vla-next-page").attr("disabled", false);
+		}
+		retPage=ret.PageNum;
 	});
-	pageNow(currentPage,ret.PageNum);
-	if(currentPage==1)
-	{
-		$("#vla-first-page").attr("class","vla-paging-down");
-		$("#vla-last-page").attr("class","vla-paging-down");
-		$("#vla-first-page").attr("disabled", true);
-		$("#vla-last-page").attr("disabled", true);
-		
-		$("#vla-final-page").attr("class","vla-paging");
-		$("#vla-next-page").attr("class","vla-paging");
-		$("#vla-final-page").attr("disabled", false);
-		$("#vla-next-page").attr("disabled", false);
-	}
-	else if(currentPage==ret.PageNum)
-	{
-		$("#vla-final-page").attr("class","vla-paging-down");
-		$("#vla-next-page").attr("class","vla-paging-down");
-		$("#vla-final-page").attr("disabled", true);
-		$("#vla-next-page").attr("disabled", true);
-		
-		$("#vla-first-page").attr("class","vla-paging");
-		$("#vla-last-page").attr("class","vla-paging");
-		$("#vla-first-page").attr("disabled", false);
-		$("#vla-last-page").attr("disabled", false);
-	}
-	else{
-		$("#vla-first-page").attr("class","vla-paging");
-		$("#vla-last-page").attr("class","vla-paging");
-		$("#vla-first-page").attr("disabled", false);
-		$("#vla-last-page").attr("disabled", false);
-		
-		$("#vla-final-page").attr("class","vla-paging");
-		$("#vla-next-page").attr("class","vla-paging");
-		$("#vla-final-page").attr("disabled", false);
-		$("#vla-next-page").attr("disabled", false);
-	}
-	return ret.PageNum;
+	return retPage;
 };
 
 var finalPage=1;
