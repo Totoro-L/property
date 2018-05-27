@@ -1,0 +1,2 @@
+<?php
+include 'needauth.php';
