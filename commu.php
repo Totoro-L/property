@@ -27,6 +27,7 @@ if($row["group"]==2)
   }
   $dan["ProNum"]=$num;
   $dan["PageNum"]=$page;
+  $dan["count"]=$count+1;
   echo json_encode($dan);
 }
 if($row["group"]==3)
