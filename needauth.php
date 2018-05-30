@@ -10,5 +10,5 @@ session_start();
 if (!$_SESSION["user"]) {
     echo "<script language=\"JavaScript\">
   window.alert('请登陆');
-  window.location.href='login.php';</script>";
+  window.location.href='property/login.html';</script>";
 }
