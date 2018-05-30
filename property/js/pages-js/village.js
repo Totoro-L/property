@@ -202,7 +202,7 @@ $(document).ready(function(){
 			data.append("pic",$("#vla-upfile")[0].files[0]);
 			$.ajax({
 				type: "POST",  //数据提交方式（post/get）
-				url: '../check.php',  //提交到的url
+				url: '../commu_join.php',  //提交到的url
 				data: data,//提交的数据
 				dataType: "json",//返回的数据类型格式
 				cache: false,
