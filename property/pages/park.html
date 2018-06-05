@@ -1,1 +1,102 @@
-park
+<div id="park">
+<div class="pk-title">
+	<span class="pk-choose1">车位状态：<select>
+		<option>全部</option>
+		<option>待审核</option>
+		<option>占用</option>
+		<option>未占用</option>
+		<option>审核失败</option>
+	</select></span>
+	<span class="pk-check"><input type="text" placeholder="/搜索车位"/><a href="#"><img src="images/u118.png" width="28px" height="28px"></a></span>
+	<button class="pk-add" type="button">批量添加车位</button>
+</div>
+<table id="pk">
+</table>
+<div class="pk-bottom">
+	<button type="button" id="pk-first-page" class="pk-paging">首页</button>
+	<button type="button" id="pk-last-page" class="pk-paging">上一页</button>
+	<span class="pk-pag-div">
+		<input type="button" value="1" class="pk-pag"/>
+		<input type="button" value="2" class="pk-pag"/>
+		<input type="button" value="3" class="pk-pag"/>
+		<input type="button" value="4" class="pk-pag"/>
+		<input type="button" value="5" class="pk-pag"/>
+	</span>
+	<button type="button" id="pk-next-page" class="pk-paging">下一页</button>
+	<button type="button" id="pk-final-page" class="pk-paging">末页</button>
+	<span class="pk-bottom-del"></span>
+</div>
+<div class="pk-addth">
+	<h1>添加车库</h1>
+	<div id="add-pk">
+		<div class="pk-name">*车库名称：<input type="text"/></div>
+		<p>*所属小区：</p>
+		<div class="form-inline">
+		  <div data-toggle="distpicker">
+			<span class="form-group">
+			  <select class="form-control" id="province1"></select>省
+			</span>
+			<span class="form-group">
+			  <select class="form-control" id="city1"></select>市
+			</span>
+			<span class="form-group">
+			  <select class="form-control" id="district1"></select>区
+			</span>
+			<span class="form-group">
+			  <select class="form-control" id="commu1">
+				<option>—— 小区 ——<option>
+			  </select>小区
+			</span>
+			</div>
+		</div>
+		<div class="pk-position">*详细地址：
+			<button type="button">选择车库位置</button>
+			<p>
+			北纬：<input type="text" class="lng" disabled="disabled" value="123‘我"/>&nbsp东经：<input type="text" class="lat" disabled="disabled"/>
+			</p>
+		</div>
+		<div class="pk-money">*价格：<select>
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+			</select>元/小时
+		</div>
+		<div class="pk-filediv">*上传车库平面图：<button type="button">添加车库层数及平面图</button>
+			<div id="pk-upbtn">层数：
+				<select>
+					<option>3F</option>
+					<option>2F</option>
+					<option>1F</option>
+					<option>-1F</option>
+					<option>-2F</option>
+					<option>-3F</option>
+				</select>
+				<input id="pk-upfile" type="file"/>
+				<button type="button">上传该层车库平面图</button>
+				<span></span>
+			</div>
+		</div>
+		<div class="pk-btn">
+			<button type="button" class="pk-btn1">退出</button>
+			<button type="button" class="pk-btn2">提交</button>
+		</div>
+	</div>
+</div>
+<div class="pk-revise">
+	<h1>修改小区上传凭证</h1>
+	<div class="pk-revise-name">小区名称：<input type="text" disabled="disabled"/></div>
+	<div class="pk-revise-file">
+		<input id="pk-revise-upfile" type="file" hidden="hidden"/>
+		<button type="button">上传新的凭证文件</button><br/>
+		<span></span>
+	</div>
+	<div class="pk-revise-btn">
+		<button type="button" class="pk-revise-btn1">退出</button>
+		<button type="button" class="pk-revise-btn2">提交</button>
+	</div>
+</div>
+</div>
+<script src="js/distpicker.data.js"></script>
+<script src="js/distpicker.js"></script>
+<script src="js/pages-js/park.js"></script>

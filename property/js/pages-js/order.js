@@ -1,34 +1,34 @@
 function addInit(){
-	$(".vla-name input").val("");
+	$(".ord-name input").val("");
 	$("#province1").get(0).selectedIndex=0;
 	$("#city1").get(0).selectedIndex=0;
 	$("#district1").get(0).selectedIndex=0;
-	$("#vla-upfile").val("");
-	$("#vla-upbtn span").html("（*支持pdf、doc、jpg、jpeg、gif、png格式）");
+	$("#ord-upfile").val("");
+	$("#ord-upbtn span").html("");
 };
 function pageNow(i,max){
 	for(var j=0;j<5;j++)
 	{
-		$($(".vla-pag-div").children("input").get(j)).removeClass("vla-btn-active");
+		$($(".ord-pag-div").children("input").get(j)).removeClass("ord-btn-active");
 	}
 	var x=i%5;
 	if(x==0)
 	{
-		$($(".vla-pag-div").children("input").get(4)).addClass("vla-btn-active");
+		$($(".ord-pag-div").children("input").get(4)).addClass("ord-btn-active");
 		x+=5;
 	}
 	else
 	{
-		$($(".vla-pag-div").children("input").get(x-1)).addClass("vla-btn-active");
+		$($(".ord-pag-div").children("input").get(x-1)).addClass("ord-btn-active");
 	}
 	var y=i-x;
 	for(var j=0;j<5;j++)
 	{
 		y=y+1;
-		$($(".vla-pag-div").children("input").get(j)).val(y);
+		$($(".ord-pag-div").children("input").get(j)).val(y);
 		if(y>max)
 		{
-			$($(".vla-pag-div").children("input").get(j)).hide();
+			$($(".ord-pag-div").children("input").get(j)).hide();
 		}
 	}
 };
@@ -43,80 +43,68 @@ function getData(currentPage){
 	$.ajaxSetup({  
 		async : false  
 	});
-	$.get("../commu.php",getPush,function(ret){
+	$.get("../commu-2.php",getPush,function(ret){
 		//alert("返回数据是："+ret);
 		// alert("总数据数是："+ret.ProNum);
 		// alert(ret.length);
-		ret=JSON.stringify(ret);
+		//ret=JSON.stringify(ret);
 		ret=JSON.parse(ret);	
-		var tab="<tr><th>序号</th><th>小区名称</th><th>归属物业</th><th>审核状态</th><th>操作</th></tr><tr><td class=\"space\"></td></tr>";
+		var tab="<tr><th>序号</th><th>车位信息</th><th>业主电话</th><th>车牌号</th><th>下单时间</th><th>预约时间</th><th>入场时间</th><th>出场时间</th><th>取消时间</th><th>订单状态</th></tr><tr><td class=\"space\"></td></tr>";
 		var statusCec;
 		for(var i=0;i<ret.count-1;i++)
         {
-			var imgAdd="<td><span id=\"span3\"><img src=\"images/u30.png\" width=\"18px\" height=\"18px\"/>下载资质文件</span>"+
+			var imgAdd="<td><span id=\"span3\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>查看平面图</span>"+
 				 "<span id=\"span2\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>修改</span>"+
-				 "<span id=\"span1\"><img src=\"images/error.png\" width=\"18px\" height=\"18px\"/>删除</span></td>";
-			if(ret[i].status==0)
-			{
-				statusCec='审核中';
-			}
-			else if(ret[i].status==1)
-			{
-				statusCec='审核通过';
-				imgAdd="<td><span id=\"span3\"><img src=\"images/u30.png\" width=\"18px\" height=\"18px\"/>下载资质文件</span></td>";
-			}
-			else
-			{
-				statusCec='审核失败';
-			}
+				 "<span id=\"span1\"><img src=\"images/error.png\" width=\"18px\" height=\"18px\"/>暂停使用</span></td>";
             tab+="<tr>";
 			tab+="<td>"+parseInt(i+1)+"</td>";
-            tab+="<td class=\"commu_name\"><a href=\"#\">"+ret[i].commu_name+"</a></td>"+
-			     "<td>"+ret[i].user+"</td>"+
-				 "<td>"+statusCec+"</td>"+
-				 imgAdd;
+            tab+="<td class=\"ord-td-width1\"><a href=\"#\">"+ret[i].commu_name+"</a></td>"+
+			     "<td class=\"ord-td-width\">"+ret[i].commu_name+"</td>"+
+				 "<td class=\"ord-td-width\">"+ret[i].commu_name+"</td>"+
+				 "<td>"+"3元/小时"+"</td>"+
+				 "<td>"+"12222"+"</td>";
             tab+="</tr>";
         }
-		$("#vla").html(tab);
+		$("#ord").html(tab);
 		$("tr:even").css("background-color","#ccc");
 		var total="共"+ret.PageNum+"页,"+ret.ProNum+"条数据";
-		$(".vla-bottom-del").html(total);
+		$(".ord-bottom-del").html(total);
 		pageNow(currentPage,ret.PageNum);
 		
 		if(currentPage==1)
 		{
-			$("#vla-first-page").attr("class","vla-paging-down");
-			$("#vla-last-page").attr("class","vla-paging-down");
-			$("#vla-first-page").attr("disabled", true);
-			$("#vla-last-page").attr("disabled", true);
+			$("#ord-first-page").attr("class","ord-paging-down");
+			$("#ord-last-page").attr("class","ord-paging-down");
+			$("#ord-first-page").attr("disabled", true);
+			$("#ord-last-page").attr("disabled", true);
 			
-			$("#vla-final-page").attr("class","vla-paging");
-			$("#vla-next-page").attr("class","vla-paging");
-			$("#vla-final-page").attr("disabled", false);
-			$("#vla-next-page").attr("disabled", false);
+			$("#ord-final-page").attr("class","ord-paging");
+			$("#ord-next-page").attr("class","ord-paging");
+			$("#ord-final-page").attr("disabled", false);
+			$("#ord-next-page").attr("disabled", false);
 		}
 		else if(currentPage==ret.PageNum)
 		{
-			$("#vla-final-page").attr("class","vla-paging-down");
-			$("#vla-next-page").attr("class","vla-paging-down");
-			$("#vla-final-page").attr("disabled", true);
-			$("#vla-next-page").attr("disabled", true);
+			$("#ord-final-page").attr("class","ord-paging-down");
+			$("#ord-next-page").attr("class","ord-paging-down");
+			$("#ord-final-page").attr("disabled", true);
+			$("#ord-next-page").attr("disabled", true);
 			
-			$("#vla-first-page").attr("class","vla-paging");
-			$("#vla-last-page").attr("class","vla-paging");
-			$("#vla-first-page").attr("disabled", false);
-			$("#vla-last-page").attr("disabled", false);
+			$("#ord-first-page").attr("class","ord-paging");
+			$("#ord-last-page").attr("class","ord-paging");
+			$("#ord-first-page").attr("disabled", false);
+			$("#ord-last-page").attr("disabled", false);
 		}
 		else{
-			$("#vla-first-page").attr("class","vla-paging");
-			$("#vla-last-page").attr("class","vla-paging");
-			$("#vla-first-page").attr("disabled", false);
-			$("#vla-last-page").attr("disabled", false);
+			$("#ord-first-page").attr("class","ord-paging");
+			$("#ord-last-page").attr("class","ord-paging");
+			$("#ord-first-page").attr("disabled", false);
+			$("#ord-last-page").attr("disabled", false);
 			
-			$("#vla-final-page").attr("class","vla-paging");
-			$("#vla-next-page").attr("class","vla-paging");
-			$("#vla-final-page").attr("disabled", false);
-			$("#vla-next-page").attr("disabled", false);
+			$("#ord-final-page").attr("class","ord-paging");
+			$("#ord-next-page").attr("class","ord-paging");
+			$("#ord-final-page").attr("disabled", false);
+			$("#ord-next-page").attr("disabled", false);
 		}
 		retPage=ret.PageNum;
 	});
@@ -140,13 +128,13 @@ function pasCheck(some,name){
 		}
 		else{
 			var flag;
-			if(some=="vlaFile"){
+			if(some=="ordFile"){
 				flag=1;
 			}
-			else if(some=="vlaDel"){
+			else if(some=="ordDel"){
 				flag=2;
 			}
-			else if(some=="vlaRev"){
+			else if(some=="ordRev"){
 				flag=3;
 			}
 			var pass={
@@ -191,21 +179,21 @@ function pasCheck(some,name){
 						}
 						else if(flag==3)
 						{
-							$(".vla-revise-name input").val(name);
-							$(".vla-revise-file span").html("（*支持pdf、doc、jpg、jpeg、gif、png格式）");
-							$(".vla-revise").show();
-							$(".vla-revise .vla-revise-file button").click(function(){
-								$("#vla-revise-upfile").click();
-								$("#vla-revise-upfile").change(function(){
-									$(".vla-revise-file span").html($("#vla-revise-upfile").val());
+							$(".ord-revise-name input").val(name);
+							$(".ord-revise-file span").html("（*支持pdf、doc、jpg、jpeg、gif、png格式）");
+							$(".ord-revise").show();
+							$(".ord-revise .ord-revise-file button").click(function(){
+								$("#ord-revise-upfile").click();
+								$("#ord-revise-upfile").change(function(){
+									$(".ord-revise-file span").html($("#ord-revise-upfile").val());
 								});
 							});
-							$(".vla-revise-btn1").click(function(){
-								$(".vla-revise").hide();
+							$(".ord-revise-btn1").click(function(){
+								$(".ord-revise").hide();
 								$(".shade").hide();
 							});
-							$(".vla-revise-btn2").click(function(){
-								var formNa=$("#vla-revise-upfile").val();
+							$(".ord-revise-btn2").click(function(){
+								var formNa=$("#ord-revise-upfile").val();
 								var FileSuf=formNa.lastIndexOf(".");
 								FileSuf=formNa.substring(FileSuf,formNa.length).toUpperCase();
 								if(FileSuf != ".PDF" && FileSuf != ".DOC" && FileSuf != ".GIF" && FileSuf != ".JPG" && FileSuf != ".JPEG" && FileSuf != ".PNG"){
@@ -213,7 +201,7 @@ function pasCheck(some,name){
 								}
 								else{
 									var data=new FormData();
-									data.append("newPicture",$("#vla-revise-upfile")[0].files[0]);
+									data.append("newPicture",$("#ord-revise-upfile")[0].files[0]);
 									$.ajax({
 										type: "POST",  //数据提交方式（post/get）
 										url: '../commu.php',  //提交到的url
@@ -227,7 +215,7 @@ function pasCheck(some,name){
 											curPage=1;
 											finalPage=getData(1);
 											$(".shade").hide();
-											$(".vla-revise").hide();
+											$(".ord-revise").hide();
 											$("body").css("overflow","scroll");
 										},
 										error:function(XMLHttpRequest, textStatus, errorThrown){
@@ -256,56 +244,56 @@ function pasCheck(some,name){
 }
 
 var finalPage=1;
-$(".vla-pag-div").children("input").css("cursor","pointer");
+$(".ord-pag-div").children("input").css("cursor","pointer");
 addInit();      //添加小区初始化
 
 $(document).ready(function(){
 	finalPage=getData(1);
 	curPage=1;
 	//选择页数
-	$("#vla-first-page").click(function(){
+	$("#ord-first-page").click(function(){
 		curPage=1;
 		finalPage=getData(1); 
 	});
-	$("#vla-final-page").click(function(){
+	$("#ord-final-page").click(function(){
 		curPage=finalPage;
 		finalPage=getData(finalPage);
 	});
-	$(".vla-pag-div .vla-pag").click(function(){
+	$(".ord-pag-div .ord-pag").click(function(){
 		curPage=$(this).val();
 		finalPage=getData(curPage);
 	})
-	$("#vla-next-page").click(function(){
+	$("#ord-next-page").click(function(){
 		curPage=parseInt(curPage)+1;
 		finalPage=getData(curPage);
 	})
-	$("#vla-last-page").click(function(){
+	$("#ord-last-page").click(function(){
 		curPage=parseInt(curPage)-1;
 		finalPage=getData(curPage);
 	})
 	
 	//添加小区
-	$(".vla-add").click(function(){
+	$(".ord-add").click(function(){
 		addInit();
 		$("html,body").animate({scrollTop:"0"},1);
 		$(".shade").show();
-		$(".vla-addth").show();
+		$(".ord-addth").show();
 		$("body").css("overflow","hidden");
 	});
 	var formNa="";
-	$("#vla-upbtn button").click(function(){
-		$("#vla-upfile").click();
-		$("#vla-upfile").change(function(){
-			formNa=$("#vla-upfile").val();
-			$("#vla-upbtn span").html(formNa);
+	$("#ord-upbtn button").click(function(){
+		$("#ord-upfile").click();
+		$("#ord-upfile").change(function(){
+			formNa=$("#ord-upfile").val();
+			$("#ord-upbtn span").html(formNa);
 		})
 	});
-	$(".vla-btn1").click(function(){
+	$(".ord-btn1").click(function(){
 		$(".shade").hide();
-		$(".vla-addth").hide();
+		$(".ord-addth").hide();
 		$("body").css("overflow","scroll");
 	});
-	$(".vla-btn2").click(function(){
+	$(".ord-btn2").click(function(){
 		var FileSuf=formNa.lastIndexOf(".");
 		FileSuf=formNa.substring(FileSuf,formNa.length).toUpperCase();
 		var SeIndex1=$("#province1").get(0).selectedIndex;
@@ -321,7 +309,7 @@ $(document).ready(function(){
 			SeCec=1;
 		}
 		
-		if($(".vla-name input").val()=="")
+		if($(".ord-name input").val()=="")
 		{
 			alert("请输入小区名称");
 		}
@@ -333,11 +321,11 @@ $(document).ready(function(){
 			alert("文件格式错误！");
 		}
 		else{
-			var vlaName;
-			vlaName=$("#province1 option:selected").val()+$("#city1 option:selected").val()+$("#district1 option:selected").val()+$(".vla-name input").val();
+			var ordName;
+			ordName=$("#province1 option:selected").val()+$("#city1 option:selected").val()+$("#district1 option:selected").val()+$(".ord-name input").val();
 			var data=new FormData();
-			data.append("commu_name",vlaName);
-			data.append("pic",$("#vla-upfile")[0].files[0]);
+			data.append("commu_name",ordName);
+			data.append("pic",$("#ord-upfile")[0].files[0]);
 			$.ajax({
 				type: "POST",  //数据提交方式（post/get）
 				url: '../commu_join.php',  //提交到的url
@@ -351,7 +339,7 @@ $(document).ready(function(){
 					curPage=1;
 					finalPage=getData(1);
 					$(".shade").hide();
-					$(".vla-addth").hide();
+					$(".ord-addth").hide();
 					$("body").css("overflow","scroll");
 				},
 				error:function(XMLHttpRequest, textStatus, errorThrown){
@@ -363,16 +351,16 @@ $(document).ready(function(){
 			return false;
 		}
 	});
-	$("#vla td #span3").click(function(){
+	$("#ord td #span3").click(function(){
 		var name=$(this).parent("td").siblings(".commu_name").text();
-		pasCheck("vlaFile",name);
+		pasCheck("ordFile",name);
 	});
-	$("#vla td #span1").click(function(){
+	$("#ord td #span1").click(function(){
 		var name=$(this).parent("td").siblings(".commu_name").text();
-		pasCheck("vlaDel",name);
+		pasCheck("ordDel",name);
 	});
-	$("#vla td #span2").click(function(){
+	$("#ord td #span2").click(function(){
 		var name=$(this).parent("td").siblings(".commu_name").text();
-		pasCheck("vlaRev",name);
+		pasCheck("ordRev",name);
 	});
 });

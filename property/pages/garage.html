@@ -1,1 +1,124 @@
-garage
+<div id="garage">
+<div class="gar-title">
+	<span class="gar-choose1">价格：<select>
+		<option>1</option>
+		<option>2</option>
+		<option>3</option>
+		<option>4</option>
+	</select>元/小时</span>
+	<span class="gar-choose2">空闲车位数：<select>
+		<option>1000-1999</option>
+		<option>2000-2999</option>
+		<option>3000-3999</option>
+		<option>4000-4999</option>
+	</select></span>
+	<span class="gar-check"><input type="text" placeholder="/搜索车库名称"/><a href="#"><img src="images/u118.png" width="28px" height="28px"></a></span>
+	<button class="gar-add" type="button">添加车库</button>
+</div>
+<table id="gar">
+</table>
+<div class="gar-bottom">
+	<button type="button" id="gar-first-page" class="gar-paging">首页</button>
+	<button type="button" id="gar-last-page" class="gar-paging">上一页</button>
+	<span class="gar-pag-div">
+		<input type="button" value="1" class="gar-pag"/>
+		<input type="button" value="2" class="gar-pag"/>
+		<input type="button" value="3" class="gar-pag"/>
+		<input type="button" value="4" class="gar-pag"/>
+		<input type="button" value="5" class="gar-pag"/>
+	</span>
+	<button type="button" id="gar-next-page" class="gar-paging">下一页</button>
+	<button type="button" id="gar-final-page" class="gar-paging">末页</button>
+	<span class="gar-bottom-del"></span>
+</div>
+<div class="gar-addth">
+	<h1>添加车库</h1>
+	<div id="add-gar">
+		<div class="gar-name">*车库名称：<input type="text"/></div>
+		<p>*所属小区：</p>
+		<div class="form-inline">
+		  <div data-toggle="distpicker">
+			<span class="form-group">
+			  <select class="form-control" id="province1"></select>省
+			</span>
+			<span class="form-group">
+			  <select class="form-control" id="city1"></select>市
+			</span>
+			<span class="form-group">
+			  <select class="form-control" id="district1"></select>区
+			</span>
+			<span class="form-group">
+			  <select class="form-control" id="commu1">
+				<option>—— 小区 ——<option>
+			  </select>小区
+			</span>
+			</div>
+		</div>
+		<div class="gar-position">*详细地址：
+			<button type="button">选择车库位置</button>
+			<p>
+			东经：<input type="text" class="lng" disabled="disabled"/>&nbsp北纬：<input type="text" class="lat" disabled="disabled"/>
+			</p>
+		</div>
+		<div class="gar-money">*价格：<select>
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+			</select>元/小时
+		</div>
+		<div class="gar-filediv">*上传车库平面图：<button type="button">添加车库层数及平面图</button>
+			<div id="gar-upbtn">层数：
+				<select>
+					<option>3F</option>
+					<option>2F</option>
+					<option>1F</option>
+					<option>-1F</option>
+					<option>-2F</option>
+					<option>-3F</option>
+				</select>
+				<input id="gar-upfile" type="file"/>
+				<button type="button">上传该层车库平面图</button>
+				<span></span>
+			</div>
+		</div>
+		<div class="gar-btn">
+			<button type="button" class="gar-btn1">退出</button>
+			<button type="button" class="gar-btn2">提交</button>
+		</div>
+	</div>
+</div>
+<div id="gar-map">
+</div>
+<div id="gar-map-input">
+	<table>
+		<tr>
+			<th>按关键字搜索：</th>
+			<th>左击获得经纬度：</th>
+		</tr>
+		<tr>
+			<td><input id="garmap-checkin" type="text" placeholder="请输入关键字进行搜索"/></td>
+			<td>东经E:<input type="text" class="gar-lnglat" id="gar-Lng" disabled="disabled"/>北纬N:<input type="text" class="gar-lnglat" id="gar-Lat" disabled="disabled"/></td>
+			<td><button type="button">确定</button></td>
+		</tr>
+	</table>
+</div>
+<div class="gar-revise">
+	<h1>修改小区上传凭证</h1>
+	<div class="gar-revise-name">小区名称：<input type="text" disabled="disabled"/></div>
+	<div class="gar-revise-file">
+		<input id="gar-revise-upfile" type="file" hidden="hidden"/>
+		<button type="button">上传新的凭证文件</button><br/>
+		<span></span>
+	</div>
+	<div class="gar-revise-btn">
+		<button type="button" class="gar-revise-btn1">退出</button>
+		<button type="button" class="gar-revise-btn2">提交</button>
+	</div>
+</div>
+</div>
+<script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+<script src="js/pages-js/gar-map.js"></script>
+<script src="js/distpicker.data.js"></script>
+<script src="js/distpicker.js"></script>
+<script src="js/pages-js/garage.js"></script>

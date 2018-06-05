@@ -1,27 +1,27 @@
-/* 小区管理 */
-.vla-title{
-	margin:15px auto;
+/* 车库管理 */
+.pk-title{
+	margin:0 auto;
 }
-.vla-title span,.vla-title button{
+.pk-title span,.pk-title button{
 	display:inline-block;
-	margin-left:100px;
+	margin-left:50px;
 }
-.vla-check input{
+.pk-check input{
 	width:260px;
 	height:28px;
 	font-size:15px;
 }
-.vla-check img{
+.pk-check img{
 	vertical-align:middle;
 	position:relative;
 	left:5px;
 }
-.vla-choose select{
-	width:110px;
+.pk-choose1 select{
+	width:150px;
 	height:25px;
 	font-size:15px;
 }
-.vla-title button{
+.pk-title button{
 	width:140px;
 	height:40px;
 	border:none;
@@ -30,166 +30,208 @@
 	color:white;
 }
 
-#vla{
+#pk{
 	margin-top:22px;
 	border-collapse:collapse;
 	text-align:center;
 }
-#vla th{
+#pk th{
 	background-color:#4B99CB;
 	color:white;
 	font-weight:normal;
-	font-size:19px;
+	font-size:16px;
 }
-#vla th,#vla td{
-	padding:8px 50px;
+#pk th,#pk td{
+	padding:8px 10px;
 }
-#vla td{
-	padding:7px 20px;
+#pk td{
+	font-size:14px;
+	padding:7px 10px;
 	border:1px solid #797979;
 }
-#vla td:nth-child(2){
-	width:310px;
-}
-#vla td span{
+#pk td span{
 	display:inline-block;
 }
-#vla td span:nth-child(2){
-	margin-left:15px;
+#pk td span:nth-child(2){
+	margin-left:10px;
 }
-#vla td span:nth-child(3){
-	margin-left:15px;
+#pk td span:nth-child(3){
+	margin-left:10px;
 }
-#vla td span img{
+#pk td span img{
 	vertical-align:middle;
 	position:relative;
 	right:2px;
 }
-#village .space{
+#pk .space{
 	border:none;
 }
-
-.vla-bottom{
-	margin-top:20px;
-	padding-left:330px;
-	top:610px;
+.pk-td-width{
+	width:190px;
 }
-.vla-bottom button,.vla-bottom span{
+
+.pk-bottom{
+	margin-top:25px;
+	padding-left:400px;
+	
+}
+.pk-bottom button,.pk-bottom span{
 	display:inline-block;
 	vertical-align:bottom;
 }
-.vla-bottom button{
+.pk-bottom button{
 	border:none;
 }
-.vla-bottom-del{
-	margin-left:120px;
+.pk-bottom-del{
+	margin-left:160px;
 	font-size:16px;
 }
-.vla-bottom .vla-paging{
+.pk-bottom .pk-paging{
 	height:28px;
 	background-color:#336699;
 	color:white;
 }
-.vla-paging-down{
+.pk-paging-down{
 	height:28px;
 	background-color:#ccc;
 	color:white;
 }
-.vla-bottom .vla-pag{
+.pk-bottom .pk-pag{
 	width:28px;
 	height:28px;
 	background-color:white;
 	border:1px solid #797979;
 }
-.vla-bottom .vla-pag:hover{
+.pk-bottom .pk-pag:hover{
 	background-color:#FFFFCC;
 }
-.vla-pag-div .vla-btn-active{
+.pk-pag-div .pk-btn-active{
 	background-color:#4B99CB;
 	color:white;
 	width:28px;
 	height:28px;
 	border:1px solid #797979;
 }
-#village button{
+#park button{
 	cursor:pointer;
 }
-.vla-pag-div{
+.pk-pag-div{
 	margin:auto 2px;
 	height:28px;
 	overflow:hidden;
 	width:159px;
 }
 
-.vla-addth{
+.pk-addth{
 	position:absolute;
-	top:146px;
-	left:420px;
-	width:555px;
-	height:387px;
+	top:50%;
+	left:50%;
+	margin-left:-350px;
+	margin-top:-250px;
+	width:700px;
+	height:500px;
 	background-color:white;
 	z-index:20;
 	display:none;
+	overflow:scroll;
 }
-.vla-addth h1{
+.pk-addth h1{
 	font-size:28px;
 	color:#4b99cb;
-	margin:5px auto;
 	text-align:left;
-	width:480px;
-	padding-left:25px;
+	width:580px;
+	padding-left:45px;
 	padding-bottom:8px;
-	padding-top:15px;
 	border-bottom:2px solid #4b99cb;
 }
-.vla-name{
+.pk-name,.pk-position,.pk-money{
 	padding-left:60px;
 	margin-top:22px;
-	font-size:18px;
-}
-.vla-name input{
-	width:260px;
-	height:30px;
 	font-size:16px;
 }
-#add-vla p{
-	margin:22px auto 12px 60px;
-	font-size:18px;
+.pk-name input{
+	width:260px;
+	height:20px;
+	font-size:14px;
 }
-#village .form-inline{
+#add-pk p{
+	margin:22px auto 12px 60px;
+	font-size:16px;
+}
+#park .form-inline{
 	padding-left:60px;
 	font-size:16px;
 }
-#village .form-inline select{
+#park .form-inline select{
 	height:30px;
 	font-size:14px;
 }
-.vla-filediv{
+.pk-position p{
 	margin-top:22px;
-	padding-left:60px;
+	text-align:left;
 }
-#vla-upbtn{
-	margin-top:12px;
-	margin-left:20px;
-	
+.pk-position input{
+	width:100px;
+	height:20px;
+	font-size:14px;
+	background-color:white;
+	border:none;
 }
-#vla-upbtn button{
-	width:82px;
-	height:28px;
+.pk-position button{
+	width:100px;
+	height:30px;
 	background-color:#4b99cb;
 	color:white;
 	font-size:14px;
 	border:none;
 	border-radius:5px;
 }
-#vla-upbtn span{
+.pk-money select{
+	width:70px;
+	height:28px;
 	font-size:14px;
 }
-.vla-btn{
+.pk-filediv{
+	margin-top:22px;
+	padding-left:60px;
+}
+.pk-filediv button{
+	width:180px;
+	height:30px;
+	background-color:#4b99cb;
+	color:white;
+	font-size:14px;
+	border:none;
+	border-radius:5px;
+}
+#pk-upbtn{
+	height:120px;
+	margin-top:12px;
+	margin-left:60px;
+	font-size:15px;
+}
+#pk-upbtn select{
+	width:50px;
+	height:30px;
+}
+#pk-upbtn button{
+	width:200px;
+	height:100px;
+	background-color:white;
+	color:#999;
+	font-size:14px;
+	border:1px dashed #999;
+	border-radius:5px;
+	margin-left:100px;
+}
+#pk-upbtn span{
+	font-size:14px;
+}
+.pk-btn{
 	margin-top:22px;
 	text-align:center;
 }
-.vla-btn button{
+.pk-btn button{
 	display:inline-block;
 	height:35px;
 	width:100px;
@@ -199,27 +241,27 @@
 	border:none;
 	border-radius:5px;
 }
-.vla-btn button:first-child{
+.pk-btn button:first-child{
 	margin-right:50px;
 }
-.vla-addth #vla-upfile{
+.pk-addth #pk-upfile{
 	display:none;
 }
-#vla td a{
+#pk td a{
 	color:black;
 	text-decoration:none;
 }
-#vla td a:hover{
+#pk td a:hover{
 	text-decoration:underline;
 }
-#vla td span{
+#pk td span{
 	cursor:pointer;
 }
-#vla td span:hover{
+#pk td span:hover{
 	text-decoration:underline;
 }
 
-.vla-revise{
+.pk-revise{
 	display:none;
 	position:absolute;
 	width:500px;
@@ -234,7 +276,7 @@
 	overflow:hidden;
 	z-index:13;
 }
-.vla-revise h1{
+.pk-revise h1{
 	font-size:28px;
 	color:#4b99cb;
 	margin:5px auto;
@@ -245,22 +287,22 @@
 	padding-top:15px;
 	border-bottom:2px solid #4b99cb;
 }
-.vla-revise .vla-revise-name{
+.pk-revise .pk-revise-name{
 	font-size:18px;
 	margin-top:30px;
 	padding-left:20px;
 	text-align:left;
 }
-.vla-revise .vla-revise-name input{
+.pk-revise .pk-revise-name input{
 	border:none;
 	font-size:16px;
 	background-color:white;
 	width:300px;
 }
-.vla-revise .vla-revise-file{
+.pk-revise .pk-revise-file{
 	margin-top:40px;
 }
-.vla-revise .vla-revise-file button{
+.pk-revise .pk-revise-file button{
 	width:200px;
 	height:38px;
 	background-color:#4b99cb;
@@ -269,13 +311,13 @@
 	border:none;
 	border-radius:5px;
 }
-.vla-revise .vla-revise-file  span{
+.pk-revise .pk-revise-file  span{
 	font-size:13px;
 }
-.vla-revise .vla-revise-btn{
+.pk-revise .pk-revise-btn{
 	margin-top:20px;
 }
-.vla-revise .vla-revise-btn button{
+.pk-revise .pk-revise-btn button{
 	display:inline-block;
 	height:35px;
 	width:100px;
@@ -285,6 +327,6 @@
 	border:none;
 	border-radius:5px;
 }
-.vla-revise .vla-revise-btn button:first-child{
+.pk-revise .pk-revise-btn button:first-child{
 	margin-right:50px;
 }
