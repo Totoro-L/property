@@ -134,43 +134,43 @@ function pasCheck(some,name){
 		$("body").css("overflow","scroll");
 	});
 	$(".pas-ok").click(function(){
-		
 		if($("#pasCh-pass").val()==""){
 			alert("请输入密码！");
 		}
 		else{
-			var flag;
-			if(some=="vlaFile"){
-				flag=1;
-			}
-			else if(some=="vlaDel"){
-				flag=2;
-			}
-			else if(some=="vlaRev"){
-				flag=3;
-			}
-			var pass={
-				"password":$("#pasCh-pass").val(),
-				"flag":flag,
-				"commu_name":name
-			};
-			//alert(pass.commu_name);
-			$.ajax({
-				type: "POST",
-				url: '../yyy.php',
-				data: pass,
-				dataType: "json",
-				cache: false,
-				processData: false,
-				contentType: false,
-				success: function(ret){
-					alert("返回数据是："+ret);
-					//ret=JSON.parse(ret);
-					alert("返回的地址是："+ret.proveSrc);
-					if(ret.result==1)
-					{
-						$(".pasCh").hide();
-						if(flag==1)
+			$.ajaxSetup({  
+				async : false  
+			});
+			$.get("../commu_change.php",{"action":"check"},function(ret){
+				alert("返回的数据是："+ret);
+				ret=JSON.stringify(ret);
+				alert("转为字符串后："+ret)
+				ret=JSON.parse(ret);
+				if(ret.result==1){
+					var flag;
+					if(some=="vlaFile"){
+						flag=1;
+					}
+					else if(some=="vlaDel"){
+						flag=2;
+					}
+					else if(some=="vlaRev"){
+						flag=3;
+					}
+					var updata={
+						"action":"change",
+						"flag":flag,
+						"commu_name":name
+					}
+					$.ajaxSetup({  
+						async : false  
+					});
+					$.get("../commu_change.php",updata,function(ret){
+						alert("返回的数据是："+ret);
+						ret=JSON.stringify(ret);
+						alert("转为字符串后："+ret);
+						ret=JSON.parse(ret);
+						if(flag==1)//下载资质文件
 						{
 							var $eleForm = $("<form method='get'></form>");  
 							$eleForm.attr("action",ret.proveSrc);  
@@ -180,7 +180,7 @@ function pasCheck(some,name){
 							$(".pasCh").hide();
 							$("body").css("overflow","scroll");
 						}
-						else if(flag==2)
+						else if(flag==2)//删除
 						{
 							curPage=1;
 							finalPage=getData(1);
@@ -189,8 +189,7 @@ function pasCheck(some,name){
 							$("body").css("overflow","scroll");
 							alert("删除成功！");
 						}
-						else if(flag==3)
-						{
+						else if(flag==3){//修改资质文件
 							$(".vla-revise-name input").val(name);
 							$(".vla-revise-file span").html("（*支持pdf、doc、jpg、jpeg、gif、png格式）");
 							$(".vla-revise").show();
@@ -213,10 +212,10 @@ function pasCheck(some,name){
 								}
 								else{
 									var data=new FormData();
-									data.append("newPicture",$("#vla-revise-upfile")[0].files[0]);
+									data.append("picture",$("#vla-revise-upfile")[0].files[0]);
 									$.ajax({
 										type: "POST",  //数据提交方式（post/get）
-										url: '../commu.php',  //提交到的url
+										url: '../commu_change.php',  //提交到的url
 										data: data,//提交的数据
 										dataType: "json",//返回的数据类型格式
 										cache: false,
@@ -239,16 +238,10 @@ function pasCheck(some,name){
 								}
 							});
 						}
-					}
-					else{
-						alert("密码输入错误！");
-						$("#pasCh-pass").val("");
-					}
-				},
-				error:function(XMLHttpRequest, textStatus, errorThrown){
-					alert(XMLHttpRequest.status);
-					alert(XMLHttpRequest.readyState);
-					alert(textStatus);
+					});
+				}
+				else{
+					alert("密码错误！");
 				}
 			});
 		}
@@ -337,7 +330,7 @@ $(document).ready(function(){
 			vlaName=$("#province1 option:selected").val()+$("#city1 option:selected").val()+$("#district1 option:selected").val()+$(".vla-name input").val();
 			var data=new FormData();
 			data.append("commu_name",vlaName);
-			data.append("pic",$("#vla-upfile")[0].files[0]);
+			data.append("picture",$("#vla-upfile")[0].files[0]);
 			$.ajax({
 				type: "POST",  //数据提交方式（post/get）
 				url: '../commu_join.php',  //提交到的url
