@@ -72,7 +72,7 @@
 	border:none;
 }
 .gar-td-width{
-	width:190px;
+	width:150px;
 }
 
 .gar-bottom{
@@ -182,14 +182,21 @@
 	background-color:white;
 	border:none;
 }
+#gar-pos-del{
+	width:260px;
+	height:24px;
+	font-size:14px;
+	border:1px solid #a9a9a9;
+}
 .gar-position button{
-	width:100px;
+	width:130px;
 	height:30px;
 	background-color:#4b99cb;
 	color:white;
 	font-size:14px;
 	border:none;
 	border-radius:5px;
+	margin-top:10px;
 }
 .gar-money select{
 	width:70px;
@@ -209,17 +216,19 @@
 	border:none;
 	border-radius:5px;
 }
-#gar-upbtn{
+.gar-upbtn{
 	height:120px;
 	margin-top:12px;
 	margin-left:60px;
 	font-size:15px;
 }
-#gar-upbtn select{
+.gar-upbtn select{
 	width:50px;
 	height:30px;
 }
-#gar-upbtn button{
+.gar-upbtn .button{
+	display:inline-block;
+	vertical-align:middle;
 	width:200px;
 	height:100px;
 	background-color:white;
@@ -229,7 +238,7 @@
 	border-radius:5px;
 	margin-left:100px;
 }
-#gar-upbtn span{
+.gar-upbtn span{
 	font-size:14px;
 }
 .gar-btn{
@@ -249,8 +258,15 @@
 .gar-btn button:first-child{
 	margin-right:50px;
 }
-.gar-addth #gar-upfile{
+.gar-addth .gar-upfile{
 	display:none;
+}
+.gar-filediv .gar-upbtn input{
+	background-color:#fc355d;
+	color:white;
+	border:none;
+	border-radius:3px;
+	margin-left:43px;
 }
 #gar td a{
 	color:black;

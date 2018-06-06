@@ -49,26 +49,28 @@
 			</span>
 			<span class="form-group">
 			  <select class="form-control" id="commu1">
-				<option>—— 小区 ——<option>
+				<option>—— 小区 ——</option>
 			  </select>小区
 			</span>
 			</div>
 		</div>
 		<div class="gar-position">*详细地址：
-			<button type="button">选择车库位置</button>
+			<input type="text" id="gar-pos-del" placeholder="请输入车库详细地址"/>
+			<br/><button type="button">选择车库经纬度</button>
 			<p>
 			东经：<input type="text" class="lng" disabled="disabled"/>&nbsp北纬：<input type="text" class="lat" disabled="disabled"/>
 			</p>
 		</div>
 		<div class="gar-money">*价格：<select>
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
 			</select>元/小时
 		</div>
-		<div class="gar-filediv">*上传车库平面图：<button type="button">添加车库层数及平面图</button>
-			<div id="gar-upbtn">层数：
+		<div class="gar-filediv">*上传车库平面图：<button class="add-pic" type="button">添加车库层数及平面图</button>
+		    <span>（*支持jpg、jpeg、png格式）</span>
+			<div class="gar-upbtn">层数：
 				<select>
 					<option>3F</option>
 					<option>2F</option>
@@ -77,9 +79,9 @@
 					<option>-2F</option>
 					<option>-3F</option>
 				</select>
-				<input id="gar-upfile" type="file"/>
-				<button type="button">上传该层车库平面图</button>
-				<span></span>
+				<input class="gar-upfile" type="file"/>
+				<div class="button">上传该层车库平面图</div>
+				<input type="button" value="删除"/>
 			</div>
 		</div>
 		<div class="gar-btn">

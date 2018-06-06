@@ -1,3 +1,4 @@
+var pageSum;   //记录总页数
 function addInit(){
 	$(".vla-name input").val("");
 	$("#province1").get(0).selectedIndex=0;
@@ -79,12 +80,13 @@ function getData(currentPage){
         }
 		$("#vla").html(tab);
 		$("tr:even").css("background-color","#ccc");
-		var total="共"+ret.PageNum+"页,"+ret.ProNum+"条数据";
-		$(".vla-bottom-del").html(total);
-		pageNow(currentPage,ret.PageNum);
 		
 		if(currentPage==1)
 		{
+			pageSum=ret.PageNum;
+			var total="共"+ret.PageNum+"页,"+ret.ProNum+"条数据";
+			$(".vla-bottom-del").html(total);
+			
 			$("#vla-first-page").attr("class","vla-paging-down");
 			$("#vla-last-page").attr("class","vla-paging-down");
 			$("#vla-first-page").attr("disabled", true);
@@ -118,6 +120,8 @@ function getData(currentPage){
 			$("#vla-final-page").attr("disabled", false);
 			$("#vla-next-page").attr("disabled", false);
 		}
+		pageNow(currentPage,pageSum);
+		retPage=ret.PageNum;
 		retPage=ret.PageNum;
 	});
 	return retPage;
@@ -138,6 +142,21 @@ function pasCheck(some,name){
 			alert("请输入密码！");
 		}
 		else{
+			var flag;
+			if(some=="vlaFile"){
+				flag=1;
+			}
+			else if(some=="vlaDel"){
+				flag=2;
+			}
+			else if(some=="vlaRev"){
+				flag=3;
+			}
+			var pass={
+				"password":$("#pasCh-pass").val(),
+				"flag":flag,
+				"commu_name":name
+			};
 			$.ajaxSetup({  
 				async : false  
 			});
