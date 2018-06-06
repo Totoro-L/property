@@ -142,21 +142,6 @@ function pasCheck(some,name){
 			alert("请输入密码！");
 		}
 		else{
-			var flag;
-			if(some=="vlaFile"){
-				flag=1;
-			}
-			else if(some=="vlaDel"){
-				flag=2;
-			}
-			else if(some=="vlaRev"){
-				flag=3;
-			}
-			var pass={
-				"password":$("#pasCh-pass").val(),
-				"flag":flag,
-				"commu_name":name
-			};
 			$.ajaxSetup({  
 				async : false  
 			});
@@ -201,12 +186,17 @@ function pasCheck(some,name){
 						}
 						else if(flag==2)//删除
 						{
-							curPage=1;
-							finalPage=getData(1);
-							$(".shade").hide();
-							$(".pasCh").hide();
-							$("body").css("overflow","scroll");
-							alert("删除成功！");
+							if(ret.status==1){
+								curPage=1;
+								finalPage=getData(1);
+								$(".shade").hide();
+								$(".pasCh").hide();
+								$("body").css("overflow","scroll");
+								alert("删除成功！");
+							}
+							else{
+								alert("删除失败，请稍后重试！");
+							}
 						}
 						else if(flag==3){//修改资质文件
 							$(".vla-revise-name input").val(name);
@@ -240,13 +230,19 @@ function pasCheck(some,name){
 										cache: false,
 										processData: false,
 										contentType: false,
-										success: function(){
-											alert("凭证文件修改成功！");
-											curPage=1;
-											finalPage=getData(1);
-											$(".shade").hide();
-											$(".vla-revise").hide();
-											$("body").css("overflow","scroll");
+										success: function(ret){
+											console.log("凭证文件："+ret);
+											if(ret.status==1){
+												alert("凭证文件修改成功！");
+												curPage=1;
+												finalPage=getData(1);
+												$(".shade").hide();
+												$(".vla-revise").hide();
+												$("body").css("overflow","scroll");
+											}
+											else{
+												alert("凭证文件修改失败，请稍后重试！");
+											}
 										},
 										error:function(XMLHttpRequest, textStatus, errorThrown){
 											alert(XMLHttpRequest.status);

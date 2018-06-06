@@ -281,62 +281,116 @@
 #gar td span:hover{
 	text-decoration:underline;
 }
-
+/* 查看 */
+.gar-pic{
+	position:absolute;
+	top:50%;
+	left:50%;
+	width:700px;
+	height:500px;
+	margin-left:-350px;
+	margin-top:-250px;
+	background-color:white;
+	z-index:20;
+	overflow:scroll;
+	display:none;
+}
+.gar-pic h1{
+	font-size:28px;
+	color:#4b99cb;
+	text-align:left;
+	width:600px;
+	padding-left:45px;
+	padding-bottom:8px;
+	border-bottom:2px solid #4b99cb;
+}
+.gar-pic-floor{
+	margin:20px 44px;
+	border-bottom:1px solid #CCC;
+	text-align:center;
+}
+.gar-pic-floor span{
+	margin-right:50px;
+}
+.gar-pic-floor img{
+	vertical-align:middle;
+	border:none;
+}
+.gar-pic-floor button{
+	background-color:#4b99cb;
+	color:white;
+	width:60px;
+	height:30px;
+	border:none;
+	border-radius:5px;
+}
+.gar-pic-btn{
+	text-align:center;
+}
+.gar-pic-btn1{
+	background-color:#336699;
+	color:white;
+	width:160px;
+	height:50px;
+	border:none;
+	border-radius:5px;
+	font-size:20px;
+	margin-top:50px;
+}
+/* 修改 */
 .gar-revise{
 	display:none;
 	position:absolute;
-	width:500px;
-	height:300px;
+	width:700px;
+	height:500px;
 	border:1px solid #CCC;
 	top:50%;
 	left:50%;
-	text-align:center;
-	margin-left:-250px;
-	margin-top:-150px;
+	padding-left:60px;
+	margin-left:-350px;
+	margin-top:-250px;
 	background-color:white;
 	overflow:hidden;
 	z-index:13;
 }
+.gar-rev-name input{
+	border:none;
+	background-color:white;
+}
 .gar-revise h1{
 	font-size:28px;
 	color:#4b99cb;
-	margin:5px auto;
+	margin:5px 0;
 	text-align:left;
-	width:480px;
+	width:600px;
 	padding-left:25px;
 	padding-bottom:8px;
 	padding-top:15px;
 	border-bottom:2px solid #4b99cb;
 }
-.gar-revise .gar-revise-name{
-	font-size:18px;
+.gar-revise div{
 	margin-top:30px;
-	padding-left:20px;
-	text-align:left;
 }
-.gar-revise .gar-revise-name input{
-	border:none;
-	font-size:16px;
-	background-color:white;
-	width:300px;
+.gar-rev-div{
+	margin-left:30px;
 }
-.gar-revise .gar-revise-file{
-	margin-top:40px;
+.gar-rev-floor{
+	width:30px;
 }
-.gar-revise .gar-revise-file button{
+.gar-rev-up{
+	display:none;
+}
+.gar-revise .button{
+	display:inline-block;
+	margin-left:100px;
+	height:100px;
 	width:200px;
-	height:38px;
-	background-color:#4b99cb;
-	color:white;
-	font-size:18px;
-	border:none;
+	vertical-align:middle;
+	background-color:white;
+	color:#999;
+	font-size:14px;
+	border:1px dashed #999;
 	border-radius:5px;
-}
-.gar-revise .gar-revise-file  span{
-	font-size:13px;
-}
-.gar-revise .gar-revise-btn{
-	margin-top:20px;
 }
 .gar-revise .gar-revise-btn button{
 	display:inline-block;
@@ -348,6 +402,11 @@
 	border:none;
 	border-radius:5px;
 }
+.gar-revise-btn{
+	text-align:center;
+	margin-left:-60px;
+}
+
 .gar-revise .gar-revise-btn button:first-child{
 	margin-right:50px;
 }

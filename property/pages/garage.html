@@ -105,14 +105,37 @@
 		</tr>
 	</table>
 </div>
-<div class="gar-revise">
-	<h1>修改小区上传凭证</h1>
-	<div class="gar-revise-name">小区名称：<input type="text" disabled="disabled"/></div>
-	<div class="gar-revise-file">
-		<input id="gar-revise-upfile" type="file" hidden="hidden"/>
-		<button type="button">上传新的凭证文件</button><br/>
-		<span></span>
+<div class="gar-pic">
+	<h1>查看车库平面图</h1>
+	<div class="gar-pic-floor">层数：
+		<span>层数</span>
+		<img class="gar-pic-floor" src="images/edit.png" width="300px" height="200px"/>
+		<button type="button">下载</button>
 	</div>
+	<div class="gar-pic-btn">
+		<button type="button" class="gar-pic-btn1">退出</button>
+	</div>
+</div>
+<div class="gar-revise">
+	<h1>修改车库信息</h1>
+	<div class="gar-rev-name">*车库名称：<input type="text" disabled="disabled"/></div>
+	<div class="gar-rev-money">*价格：<select>
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+		</select>元/小时
+	</div>
+	<div class="gar-rev-pic">*修改车库平面图：<button class="rev-pic" type="button">添加车库层数及平面图</button>
+	    <span>（*支持jpg、jpeg、png格式）</span>
+		<div class="gar-rev-div">层数：
+			<input type="text" class="gar-rev-floor"/>
+			<input class="gar-rev-up" type="file"/>
+			<div class="button">上传该层车库平面图</div>
+			<input type="button" value="删除"/>
+		</div>
+	</div>
+	
 	<div class="gar-revise-btn">
 		<button type="button" class="gar-revise-btn1">退出</button>
 		<button type="button" class="gar-revise-btn2">提交</button>
