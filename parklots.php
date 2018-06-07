@@ -1,5 +1,6 @@
 <?php
 include 'needauth.php';
+ini_set("display_errors","Off");
 $hand = mysqli_connect("$db_host", "$db_user", "$db_pwd") or die('数据库连接失败');
 mysqli_select_db($hand, "$db_name") or die('数据库无此库');
 $user=$_SESSION["user"];
@@ -16,6 +17,7 @@ switch ($_GET['action']) {
 }
 function check()
 {
+    global $hand;
     $total=10;
     $min=$_GET["jsonPage"]["currentPage"]*$total-10;
     $count=0;
@@ -50,6 +52,7 @@ function check()
 }
 function choose()
 {
+    global $hand;
     $where=$_POST["where"];
     $count=0;
     $sql="select commu_name from commu_info where user_name='$user' and status=1 and commu_name like '%$where%'";
@@ -64,6 +67,7 @@ function choose()
 }
 function join_join()
 {
+    global $hand;
     $arr=$_POST["arr"];
     $num=$_POST["pictureSum"];
     $commu_name=$_POST["commu_name"];
