@@ -41,15 +41,15 @@ function getData(currentPage){
 		"jsonPage":getPush
 	};
 	var retPage;
-	$.ajaxSetup({  
-		async : false  
+	$.ajaxSetup({
+		async : false
 	});
 	$.get("../commu.php",getPush,function(ret){
 		//alert("返回数据是："+ret);
 		// alert("总数据数是："+ret.ProNum);
 		// alert(ret.length);
 		ret=JSON.stringify(ret);
-		ret=JSON.parse(ret);	
+		ret=JSON.parse(ret);
 		var tab="<tr><th>序号</th><th>小区名称</th><th>归属物业</th><th>审核状态</th><th>操作</th></tr><tr><td class=\"space\"></td></tr>";
 		var statusCec;
 		for(var i=0;i<ret.count-1;i++)
@@ -80,18 +80,18 @@ function getData(currentPage){
         }
 		$("#vla").html(tab);
 		$("tr:even").css("background-color","#ccc");
-		
+
 		if(currentPage==1)
 		{
 			pageSum=ret.PageNum;
 			var total="共"+ret.PageNum+"页,"+ret.ProNum+"条数据";
 			$(".vla-bottom-del").html(total);
-			
+
 			$("#vla-first-page").attr("class","vla-paging-down");
 			$("#vla-last-page").attr("class","vla-paging-down");
 			$("#vla-first-page").attr("disabled", true);
 			$("#vla-last-page").attr("disabled", true);
-			
+
 			$("#vla-final-page").attr("class","vla-paging");
 			$("#vla-next-page").attr("class","vla-paging");
 			$("#vla-final-page").attr("disabled", false);
@@ -103,7 +103,7 @@ function getData(currentPage){
 			$("#vla-next-page").attr("class","vla-paging-down");
 			$("#vla-final-page").attr("disabled", true);
 			$("#vla-next-page").attr("disabled", true);
-			
+
 			$("#vla-first-page").attr("class","vla-paging");
 			$("#vla-last-page").attr("class","vla-paging");
 			$("#vla-first-page").attr("disabled", false);
@@ -114,7 +114,7 @@ function getData(currentPage){
 			$("#vla-last-page").attr("class","vla-paging");
 			$("#vla-first-page").attr("disabled", false);
 			$("#vla-last-page").attr("disabled", false);
-			
+
 			$("#vla-final-page").attr("class","vla-paging");
 			$("#vla-next-page").attr("class","vla-paging");
 			$("#vla-final-page").attr("disabled", false);
@@ -142,17 +142,19 @@ function pasCheck(some,name){
 			alert("请输入密码！");
 		}
 		else{
+			//alert(jsonpas);
 			$.ajax({
 				type: "POST",  //数据提交方式（post/get）
 				url: '../commu_change.php?action=check',  //提交到的url
-				data: "",//提交的数据
+				data: {"password":$("#pasCh-pass").val()},//提交的数据
 				dataType: "json",//返回的数据类型格式
-				cache: false,
-				processData: false,
-				contentType: false,
+				//cache: false,
+				//processData: false,
+				//contentType: false,
 				success: function(ret){
 					console.log('重输密码返回的数据是：'+ret);
 					console.log('重输密码转为字符串后是：'+JSON.stringify(ret));
+					console.log(ret.result);
 					if(ret.result==1){
 						var flag;
 						if(some=="vlaFile"){
@@ -181,10 +183,10 @@ function pasCheck(some,name){
 								success: function(ret){
 									console.log('下载文件返回的数据是：'+ret);
 									console.log('下载文件转为字符串后是：'+JSON.stringify(ret));
-									var $eleForm = $("<form method='get'></form>");  
-									$eleForm.attr("action",ret.proveSrc);  
-									$(document.body).append($eleForm);  
-									$eleForm.submit(); 
+									var $eleForm = $("<form method='get'></form>");
+									$eleForm.attr("action",ret.proveSrc);
+									$(document.body).append($eleForm);
+									$eleForm.submit();
 									$(".shade").hide();
 									$(".pasCh").hide();
 									$("body").css("overflow","scroll");
@@ -226,7 +228,7 @@ function pasCheck(some,name){
 									alert(XMLHttpRequest.readyState);
 									alert(textStatus);
 								}
-							});	
+							});
 						}
 						else if(flag==3){//修改资质文件
 							$(".vla-revise-name input").val(name);
@@ -252,10 +254,10 @@ function pasCheck(some,name){
 								else{
 									var data=new FormData();
 									data.append("picture",$("#vla-revise-upfile")[0].files[0]);
-									
+
 									data.append("flag",flag);
 									data.append("commu_name",name);
-									
+
 									$.ajax({
 										type: "POST",  //数据提交方式（post/get）
 										url: '../commu_change.php?action=change',  //提交到的url
@@ -313,7 +315,7 @@ $(document).ready(function(){
 	//选择页数
 	$("#vla-first-page").click(function(){
 		curPage=1;
-		finalPage=getData(1); 
+		finalPage=getData(1);
 	});
 	$("#vla-final-page").click(function(){
 		curPage=finalPage;
@@ -331,7 +333,7 @@ $(document).ready(function(){
 		curPage=parseInt(curPage)-1;
 		finalPage=getData(curPage);
 	})
-	
+
 	//添加小区
 	$(".vla-add").click(function(){
 		addInit();
@@ -368,7 +370,7 @@ $(document).ready(function(){
 		{
 			SeCec=1;
 		}
-		
+
 		if($(".vla-name input").val()=="")
 		{
 			alert("请输入小区名称");

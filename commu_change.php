@@ -12,6 +12,7 @@ switch ($_GET['action']) {
 }
 function check()
 {
+    global $hand;
     $user=$_SESSION["user"];
     $pwd=md5($_POST["password"]);
     $sql="select id from user_info where user_name='$user' and password='$pwd'";
@@ -29,6 +30,7 @@ function check()
 }
 function change()
 {
+    global $hand;
     $user=$_SESSION["user"];
     $commu_name=$_POST["commu_name"];
     switch ($_POST["flag"]) {
