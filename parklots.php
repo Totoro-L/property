@@ -5,13 +5,13 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
 $user=$_SESSION["user"];
 switch ($_GET['action']) {
     case 'check':
-        check();
+        check();//密码验证
         break;
     case 'choose':
-        choose();
+        choose();//级联选择小区
         break;
     case 'join':
-        join_join();
+        join_join();//添加车库
         break;
 }
 function check()
