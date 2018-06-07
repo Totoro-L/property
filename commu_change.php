@@ -13,6 +13,7 @@ switch ($_GET['action']) {
 function check()
 {
     global $hand;
+    //print_r (json_decode($_POST));
     $user=$_SESSION["user"];
     $pwd=md5($_POST["password"]);
     $sql="select id from user_info where user_name='$user' and password='$pwd'";
