@@ -142,61 +142,91 @@ function pasCheck(some,name){
 			alert("请输入密码！");
 		}
 		else{
-			$.ajaxSetup({  
-				async : false  
-			});
-			$.get("../commu_change.php",{"action":"check"},function(ret){
-				alert("返回的数据是："+ret);
-				ret=JSON.stringify(ret);
-				alert("转为字符串后："+ret)
-				ret=JSON.parse(ret);
-				if(ret.result==1){
-					var flag;
-					if(some=="vlaFile"){
-						flag=1;
-					}
-					else if(some=="vlaDel"){
-						flag=2;
-					}
-					else if(some=="vlaRev"){
-						flag=3;
-					}
-					var updata={
-						"action":"change",
-						"flag":flag,
-						"commu_name":name
-					}
-					$.ajaxSetup({  
-						async : false  
-					});
-					$.get("../commu_change.php",updata,function(ret){
-						alert("返回的数据是："+ret);
-						ret=JSON.stringify(ret);
-						alert("转为字符串后："+ret);
-						ret=JSON.parse(ret);
+			$.ajax({
+				type: "POST",  //数据提交方式（post/get）
+				url: '../commu_change.php?action=check',  //提交到的url
+				data: "",//提交的数据
+				dataType: "json",//返回的数据类型格式
+				cache: false,
+				processData: false,
+				contentType: false,
+				success: function(ret){
+					console.log('重输密码返回的数据是：'+ret);
+					console.log('重输密码转为字符串后是：'+JSON.stringify(ret));
+					if(ret.result==1){
+						var flag;
+						if(some=="vlaFile"){
+							flag=1;
+						}
+						else if(some=="vlaDel"){
+							flag=2;
+						}
+						else if(some=="vlaRev"){
+							flag=3;
+						}
+						var updata={
+							"flag":flag,
+							"commu_name":name
+						}
 						if(flag==1)//下载资质文件
 						{
-							var $eleForm = $("<form method='get'></form>");  
-							$eleForm.attr("action",ret.proveSrc);  
-							$(document.body).append($eleForm);  
-							$eleForm.submit(); 
-							$(".shade").hide();
-							$(".pasCh").hide();
-							$("body").css("overflow","scroll");
+							$.ajax({
+								type: "POST",  //数据提交方式（post/get）
+								url: '../commu_change.php?action=change',  //提交到的url
+								data: updata,//提交的数据
+								dataType: "json",//返回的数据类型格式
+								cache: false,
+								processData: false,
+								contentType: false,
+								success: function(ret){
+									console.log('下载文件返回的数据是：'+ret);
+									console.log('下载文件转为字符串后是：'+JSON.stringify(ret));
+									var $eleForm = $("<form method='get'></form>");  
+									$eleForm.attr("action",ret.proveSrc);  
+									$(document.body).append($eleForm);  
+									$eleForm.submit(); 
+									$(".shade").hide();
+									$(".pasCh").hide();
+									$("body").css("overflow","scroll");
+								},
+								error:function(XMLHttpRequest, textStatus, errorThrown){
+									alert(XMLHttpRequest.status);
+									alert(XMLHttpRequest.readyState);
+									alert(textStatus);
+								}
+							});
 						}
 						else if(flag==2)//删除
 						{
-							if(ret.status==1){
-								curPage=1;
-								finalPage=getData(1);
-								$(".shade").hide();
-								$(".pasCh").hide();
-								$("body").css("overflow","scroll");
-								alert("删除成功！");
-							}
-							else{
-								alert("删除失败，请稍后重试！");
-							}
+							$.ajax({
+								type: "POST",  //数据提交方式（post/get）
+								url: '../commu_change.php?action=change',  //提交到的url
+								data: updata,//提交的数据
+								dataType: "json",//返回的数据类型格式
+								cache: false,
+								processData: false,
+								contentType: false,
+								success: function(ret){
+									console.log('删除返回的数据是：'+ret);
+									console.log('删除转为字符串后是：'+JSON.stringify(ret));
+									if(ret.status==1){
+										curPage=1;
+										finalPage=getData(1);
+										$(".shade").hide();
+										$(".pasCh").hide();
+										$("body").css("overflow","scroll");
+										alert("删除成功！");
+									}
+									else{
+										alert("删除失败，请稍后重试！");
+									}
+								},
+								error:function(XMLHttpRequest, textStatus, errorThrown){
+									alert(XMLHttpRequest.status);
+									alert(XMLHttpRequest.readyState);
+									alert(textStatus);
+								}
+							});	
 						}
 						else if(flag==3){//修改资质文件
 							$(".vla-revise-name input").val(name);
@@ -222,16 +252,21 @@ function pasCheck(some,name){
 								else{
 									var data=new FormData();
 									data.append("picture",$("#vla-revise-upfile")[0].files[0]);
+									
+									data.append("flag",flag);
+									data.append("commu_name",name);
+									
 									$.ajax({
 										type: "POST",  //数据提交方式（post/get）
-										url: '../commu_change.php',  //提交到的url
-										data: data,//提交的数据
+										url: '../commu_change.php?action=change',  //提交到的url
+										data:data,//提交的数据
 										dataType: "json",//返回的数据类型格式
 										cache: false,
 										processData: false,
 										contentType: false,
 										success: function(ret){
-											console.log("凭证文件："+ret);
+											console.log('修改文件返回的数据是：'+ret);
+											console.log('修改文件转为字符串后是：'+JSON.stringify(ret));
 											if(ret.status==1){
 												alert("凭证文件修改成功！");
 												curPage=1;
@@ -253,10 +288,15 @@ function pasCheck(some,name){
 								}
 							});
 						}
-					});
-				}
-				else{
-					alert("密码错误！");
+					}
+					else{
+						alert("密码错误！");
+					}
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
 				}
 			});
 		}
