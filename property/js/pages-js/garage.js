@@ -40,6 +40,9 @@ function getData(currentPage){
 	var getPush={
 		"currentPage":currentPage
 	};
+	getPush={
+		"jsonPage":getPush
+	};
 	$.ajax({
 		type: "POST",  //数据提交方式（post/get）
 		url: '../parklots.php?action=check',  //提交到的url
@@ -53,7 +56,7 @@ function getData(currentPage){
 			// alert("总数据数是："+ret.ProNum);
 			// alert(ret.length);
 			ret=JSON.stringify(ret);
-			ret=JSON.parse(ret);	
+			ret=JSON.parse(ret);
 			var tab="<tr><th>序号</th><th>车库名称</th><th>归属小区</th><th>详细地址</th><th>价格</th><th>空闲车位数</th><th>车位状态</th><th>操作</th></tr><tr><td class=\"space\"></td></tr>";
 			var statusCec;
 			for(var i=0;i<ret.count-1;i++)
@@ -86,18 +89,18 @@ function getData(currentPage){
 			}
 			$("#gar").html(tab);
 			$("tr:even").css("background-color","#ccc");
-			
+
 			if(currentPage==1)
 			{
 				pageSum=ret.PageNum;
 				var total="共"+ret.PageNum+"页,"+ret.ProNum+"条数据";
 				$(".gar-bottom-del").html(total);
-				
+
 				$("#gar-first-page").attr("class","gar-paging-down");
 				$("#gar-last-page").attr("class","gar-paging-down");
 				$("#gar-first-page").attr("disabled", true);
 				$("#gar-last-page").attr("disabled", true);
-				
+
 				$("#gar-final-page").attr("class","gar-paging");
 				$("#gar-next-page").attr("class","gar-paging");
 				$("#gar-final-page").attr("disabled", false);
@@ -109,7 +112,7 @@ function getData(currentPage){
 				$("#gar-next-page").attr("class","gar-paging-down");
 				$("#gar-final-page").attr("disabled", true);
 				$("#gar-next-page").attr("disabled", true);
-				
+
 				$("#gar-first-page").attr("class","gar-paging");
 				$("#gar-last-page").attr("class","gar-paging");
 				$("#gar-first-page").attr("disabled", false);
@@ -120,7 +123,7 @@ function getData(currentPage){
 				$("#gar-last-page").attr("class","gar-paging");
 				$("#gar-first-page").attr("disabled", false);
 				$("#gar-last-page").attr("disabled", false);
-				
+
 				$("#gar-final-page").attr("class","gar-paging");
 				$("#gar-next-page").attr("class","gar-paging");
 				$("#gar-final-page").attr("disabled", false);
@@ -135,7 +138,7 @@ function getData(currentPage){
 			alert(textStatus);
 		}
 	});
-	
+
 	return retPage;
 };
 function pasCheck(some,name){
@@ -155,17 +158,19 @@ function pasCheck(some,name){
 		}
 		else{
 			var pas={
-				"password":$("#pasCh-pass").val()
+				"position":{
+					"password":$("#pasCh-pass").val()
+				}
 			}
-			pas=JSON.stringify(pas);
+			//pas=JSON.stringify(pas);
 			$.ajax({
 				type: "POST",  //数据提交方式（post/get）
 				url: '../parklots.php?action=check',  //提交到的url
 				data:pas,//提交的数据
 				dataType: "json",//返回的数据类型格式
 				//cache: false,
-				processData: false,
-				contentType: "application/json",
+				//processData: false,
+				//contentType: "application/json",
 				success: function(ret){
 					console.log("返回的数据是："+ret);
 					//ret=JSON.stringify(ret);
@@ -182,8 +187,10 @@ function pasCheck(some,name){
 							flag=3;
 						}
 						var updata={
-							"flag":flag,
-							"park_name":name
+							"position":{
+								"flag":flag,
+								"park_name":name
+							}
 						}
 						updata=JSON.stringify(updata);
 						if(flag==1)//查看平面图
@@ -193,9 +200,9 @@ function pasCheck(some,name){
 								url: '../parklots.php?action=change',  //提交到的url
 								data:updata,//提交的数据
 								dataType: "json",//返回的数据类型格式
-								cache: false,
-								processData: false,
-								contentType: "application/json",
+								//cache: false,
+								//processData: false,
+								//contentType: "application/json",
 								success: function(ret){
 									console.log("返回的数据是："+ret);
 									ret=JSON.stringify(ret);
@@ -209,7 +216,7 @@ function pasCheck(some,name){
 									$(".gar-pic-floor").remove();
 									$(".pasCh").hide();
 									$(".gar-pic").show();
-									
+
 									for(var i=0;i<ret.count-1;i++)
 									{
 										$(".gar-pic").append(html);
@@ -223,9 +230,9 @@ function pasCheck(some,name){
 									})
 									$(".gar-pic-floor button").off("click").on("click",(function(){
 										var $eleForm = $("<form method='get'></form>");
-										var download=$(this).siblings("img").attr("src");							
-										$eleForm.attr("action",download);  
-										$(document.body).append($eleForm);  
+										var download=$(this).siblings("img").attr("src");
+										$eleForm.attr("action",download);
+										$(document.body).append($eleForm);
 										$eleForm.submit();
 									}))
 								},
@@ -269,7 +276,7 @@ function pasCheck(some,name){
 									alert(textStatus);
 								}
 							});
-							
+
 						}
 						else if(flag==3){//修改
 							$(".pasCh").hide();
@@ -290,7 +297,7 @@ function pasCheck(some,name){
 								$(".gar-rev-div .button").html(imgRev);
 							}
 							$('.gar-revise').show();
-							
+
 							$(".gar-rev-pic .rev-pic").off("click").on("click",(function(){
 								$(".gar-rev-pic").append(htmlRev);
 								$('.gar-rev-pic .gar-rev-div input[type="button"]').click(function(){
@@ -309,8 +316,8 @@ function pasCheck(some,name){
 											$(this).val("");
 										}
 										else{
-											var file = this.files[0];    
-											var reader = new FileReader();    
+											var file = this.files[0];
+											var reader = new FileReader();
 											reader.readAsDataURL(file);
 											reader.onload = function(e){
 												formNa='<img width="200px" height="100px" src="'+this.result+'"/>';
@@ -334,7 +341,7 @@ function pasCheck(some,name){
 									"floor":refloor,
 									"picture":rebase
 								};// 数组追加一个元素
-								
+
 								if(!rebase){
 									repicFlag=0;
 								}
@@ -356,7 +363,8 @@ function pasCheck(some,name){
 									"flag":flag,
 									"park_name":name
 								}
-								data=JSON.stringify(data);
+								data='{"position":'+data+'}'
+								//data=JSON.stringify(data);
 								console.log('传到后台的数据是：'+data);
 								$.ajax({
 									type: "POST",  //数据提交方式（post/get）
@@ -364,12 +372,12 @@ function pasCheck(some,name){
 									data: data,//提交的数据
 									dataType: "json",//返回的数据类型格式
 									//cache: false,
-									processData: false,
-									contentType: "application/json",
+									//processData: false,
+									//contentType: "application/json",
 									success: function(ret){
 										console.log('返回到前端的数据是：'+ret);
 										//ret=JSON.stringify(ret);
-										ret=JSON.parse(ret);	
+										ret=JSON.parse(ret);
 										if(ret.status==1){
 											alert("提交成功");
 											curPage=1;
@@ -401,7 +409,7 @@ function pasCheck(some,name){
 					alert(XMLHttpRequest.readyState);
 					alert(textStatus);
 				}
-			});	
+			});
 		}
 	});
 }
@@ -416,7 +424,7 @@ $(document).ready(function(){
 	//选择页数
 	$("#gar-first-page").click(function(){
 		curPage=1;
-		finalPage=getData(1); 
+		finalPage=getData(1);
 	});
 	$("#gar-final-page").click(function(){
 		curPage=finalPage;
@@ -434,7 +442,7 @@ $(document).ready(function(){
 		curPage=parseInt(curPage)-1;
 		finalPage=getData(curPage);
 	})
-	
+
 	//添加车库
 	$(".gar-add").click(function(){
 		addInit();
@@ -449,9 +457,9 @@ $(document).ready(function(){
 		$("#commu1").append("<option>"+"—— 小区 ——"+"</option>");
 		var place=$("#province1 option:selected").val()+$("#city1 option:selected").val()+$("#district1 option:selected").val();
 		var getPush={
-			"where":place
+			"position":{"where":place}
 		};
-		getPush=JSON.stringify(getPush);
+		//getPush=JSON.stringify(getPush);
 		if($("#province1").get(0).selectedIndex!=0){
 			$.ajax({
 				type: "POST",  //数据提交方式（post/get）
@@ -459,15 +467,17 @@ $(document).ready(function(){
 				data: getPush,//提交的数据
 				dataType: "json",//返回的数据类型格式
 				//cache: false,
-				processData: false,
-				contentType: "application/json",
+				//processData: false,
+				//contentType: "application/json",
 				success: function(ret){
 					console.log("级联返回数据是："+ret);
 					// alert("总数据数是："+ret.ProNum);
 					// alert(ret.length);
 					ret=JSON.stringify(ret);
+					console.log("级联返回数据是："+ret);
 					ret=JSON.parse(ret);
-					for(var i=0;i<ret.count-1;i++)
+					//console.log("级联返回数据是："+ret.count-1);
+					for(var i=0;i<parseInt(ret.count);i++)
 					{
 						$("#commu1").append("<option>"+ret[i].commu_name+"</option>");
 					}
@@ -526,8 +536,8 @@ $(document).ready(function(){
 					$(this).val("");
 				}
 				else{
-					var file = this.files[0];    
-					var reader = new FileReader();    
+					var file = this.files[0];
+					var reader = new FileReader();
 					reader.readAsDataURL(file);
 					reader.onload = function(e){
 						formNa='<img width="200px" height="100px" src="'+this.result+'"/>';
@@ -539,7 +549,7 @@ $(document).ready(function(){
 		}));
 	}));
 		//退出
-	$(".gar-btn1").click(function(){  
+	$(".gar-btn1").click(function(){
 		$(".shade").hide();
 		$(".gar-addth").hide();
 		$("body").css("overflow","scroll");
@@ -560,7 +570,7 @@ $(document).ready(function(){
 				"floor":floor,
 				"picture":base
 			};// 数组追加一个元素
-			
+
 			if(!base){
 				picFlag=0;
 			}
@@ -600,7 +610,8 @@ $(document).ready(function(){
 				'pictureSum':length,
 				'arr':arr
 			}
-			data=JSON.stringify(data);
+			data='{"position":'+data+'}';
+		//	data=JSON.stringify(data);
 			console.log('传到后台的数据是：'+data);
 			$.ajax({
 				type: "POST",  //数据提交方式（post/get）
@@ -608,12 +619,12 @@ $(document).ready(function(){
 				data: data,//提交的数据
 				dataType: "json",//返回的数据类型格式
 				//cache: false,
-				processData: false,
-			    contentType: "application/json",
+			//	processData: false,
+			  //  contentType: "application/json",
 				success: function(ret){
 					console.log('返回到前端的数据是：'+ret);
 					//ret=JSON.stringify(ret);
-					ret=JSON.parse(ret);	
+					ret=JSON.parse(ret);
 					if(ret.status==1){
 						alert("提交成功");
 						curPage=1;

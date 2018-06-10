@@ -167,8 +167,10 @@ function pasCheck(some,name){
 							flag=3;
 						}
 						var updata={
-							"flag":flag,
-							"commu_name":name
+							"position":{
+								"flag":flag,
+								"commu_name":name
+							}
 						}
 						if(flag==1)//下载资质文件
 						{
@@ -177,9 +179,9 @@ function pasCheck(some,name){
 								url: '../commu_change.php?action=change',  //提交到的url
 								data: updata,//提交的数据
 								dataType: "json",//返回的数据类型格式
-								cache: false,
-								processData: false,
-								contentType: false,
+								//cache: false,
+								//processData: false,
+								//contentType: false,
 								success: function(ret){
 									console.log('下载文件返回的数据是：'+ret);
 									console.log('下载文件转为字符串后是：'+JSON.stringify(ret));

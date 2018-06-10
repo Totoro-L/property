@@ -3,7 +3,6 @@ include 'needauth.php';
 ini_set("display_errors","Off");
 $hand = mysqli_connect("$db_host", "$db_user", "$db_pwd") or die('数据库连接失败');
 mysqli_select_db($hand, "$db_name") or die('数据库无此库');
-$user=$_SESSION["user"];
 switch ($_GET['action']) {
     case 'check':
         check();//密码验证
@@ -18,6 +17,7 @@ switch ($_GET['action']) {
 function check()
 {
     global $hand;
+    $user=$_SESSION["user"];
     $total=10;
     $min=$_GET["jsonPage"]["currentPage"]*$total-10;
     $count=0;
@@ -53,21 +53,25 @@ function check()
 function choose()
 {
     global $hand;
-    $where=$_POST["where"];
+    $user=$_SESSION["user"];
+    $where=$_POST["position"]["where"];
     $count=0;
     $sql="select commu_name from commu_info where user_name='$user' and status=1 and commu_name like '%$where%'";
     $result = mysqli_query($hand, $sql);
     while($row = mysqli_fetch_assoc($result))
     {
+        //echo $row["commu_name"];
         $name=str_replace($where,'',$row["commu_name"]);
         $dan["$count"]["commu_name"]=$name;
         $count++;
     }
+    $dan["count"]=$count;
     echo json_encode($dan);
 }
 function join_join()
 {
     global $hand;
+    $user=$_SESSION["user"];
     $arr=$_POST["arr"];
     $num=$_POST["pictureSum"];
     $commu_name=$_POST["commu_name"];
