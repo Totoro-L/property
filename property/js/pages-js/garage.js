@@ -45,9 +45,9 @@ function getData(currentPage){
 		url: '../parklots.php?action=check',  //提交到的url
 		data: getPush,//提交的数据
 		dataType: "json",//返回的数据类型格式
-		cache: false,
+		//cache: false,
 		processData: false,
-		contentType: false,
+		contentType: "application/json",
 		success: function(ret){
 			console.log("返回数据是："+ret);
 			// alert("总数据数是："+ret.ProNum);
@@ -154,14 +154,18 @@ function pasCheck(some,name){
 			alert("请输入密码！");
 		}
 		else{
+			var pas={
+				"password":$("#pasCh-pass").val()
+			}
+			pas=JSON.stringify(pas);
 			$.ajax({
 				type: "POST",  //数据提交方式（post/get）
 				url: '../parklots.php?action=check',  //提交到的url
-				data:"",//提交的数据
+				data:pas,//提交的数据
 				dataType: "json",//返回的数据类型格式
-				cache: false,
+				//cache: false,
 				processData: false,
-				contentType: false,
+				contentType: "application/json",
 				success: function(ret){
 					console.log("返回的数据是："+ret);
 					//ret=JSON.stringify(ret);
@@ -181,6 +185,7 @@ function pasCheck(some,name){
 							"flag":flag,
 							"park_name":name
 						}
+						updata=JSON.stringify(updata);
 						if(flag==1)//查看平面图
 						{
 							$.ajax({
@@ -190,7 +195,7 @@ function pasCheck(some,name){
 								dataType: "json",//返回的数据类型格式
 								cache: false,
 								processData: false,
-								contentType: false,
+								contentType: "application/json",
 								success: function(ret){
 									console.log("返回的数据是："+ret);
 									ret=JSON.stringify(ret);
@@ -238,9 +243,9 @@ function pasCheck(some,name){
 								url: '../parklots.php?action=change',  //提交到的url
 								data:updata,//提交的数据
 								dataType: "json",//返回的数据类型格式
-								cache: false,
+								//cache: false,
 								processData: false,
-								contentType: false,
+								contentType: "application/json",
 								success: function(ret){
 									console.log("返回的数据是："+ret);
 									ret=JSON.stringify(ret);
@@ -351,15 +356,16 @@ function pasCheck(some,name){
 									"flag":flag,
 									"park_name":name
 								}
-								console.log('传到后台的数据是：'+JSON.stringify(data));
+								data=JSON.stringify(data);
+								console.log('传到后台的数据是：'+data);
 								$.ajax({
 									type: "POST",  //数据提交方式（post/get）
 									url: '../parklots.php?action=change',  //提交到的url
 									data: data,//提交的数据
 									dataType: "json",//返回的数据类型格式
-									cache: false,
+									//cache: false,
 									processData: false,
-									contentType: false,
+									contentType: "application/json",
 									success: function(ret){
 										console.log('返回到前端的数据是：'+ret);
 										//ret=JSON.stringify(ret);
@@ -445,15 +451,16 @@ $(document).ready(function(){
 		var getPush={
 			"where":place
 		};
+		getPush=JSON.stringify(getPush);
 		if($("#province1").get(0).selectedIndex!=0){
 			$.ajax({
 				type: "POST",  //数据提交方式（post/get）
 				url: '../parklots.php?action=choose',  //提交到的url
 				data: getPush,//提交的数据
 				dataType: "json",//返回的数据类型格式
-				cache: false,
+				//cache: false,
 				processData: false,
-				contentType: false,
+				contentType: "application/json",
 				success: function(ret){
 					console.log("级联返回数据是："+ret);
 					// alert("总数据数是："+ret.ProNum);
@@ -593,15 +600,16 @@ $(document).ready(function(){
 				'pictureSum':length,
 				'arr':arr
 			}
-			console.log('传到后台的数据是：'+JSON.stringify(data));
+			data=JSON.stringify(data);
+			console.log('传到后台的数据是：'+data);
 			$.ajax({
 				type: "POST",  //数据提交方式（post/get）
 				url: '../parklots.php?action=join',  //提交到的url
 				data: data,//提交的数据
 				dataType: "json",//返回的数据类型格式
-				cache: false,
+				//cache: false,
 				processData: false,
-			    contentType: false,
+			    contentType: "application/json",
 				success: function(ret){
 					console.log('返回到前端的数据是：'+ret);
 					//ret=JSON.stringify(ret);
