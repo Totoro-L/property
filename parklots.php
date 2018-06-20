@@ -72,13 +72,13 @@ function join_join()
 {
     global $hand;
     $user=$_SESSION["user"];
-    $arr=$_POST["arr"];
-    $num=$_POST["pictureSum"];
-    $commu_name=$_POST["commu_name"];
-    $lng=$_POST["lng"];
-    $lat=$_POST["lat"];
-    $price=$_POST["price"];
-    $place=$_POST["place"];
+    $arr=$_POST["position"]["arr"];
+    $num=$_POST["position"]["pictureSum"];
+    $commu_name=$_POST["position"]["commu_name"];
+    $lng=$_POST["position"]["lng"];
+    $lat=$_POST["position"]["lat"];
+    $price=$_POST["position"]["price"];
+    $place=$_POST["position"]["place"];
     for($i=1;$i<=$num;$i++)
     {
         $floor=$arr["$i"]["floor"];
@@ -99,7 +99,7 @@ function join_join()
         if (!$r) {
             $dan["status"]='0';
         }else{
-            $name=$_POST["park_name"].$floor;
+            $name=$_POST["position"]["park_name"].$floor;
             $sql="insert into parklots_info (`commu_name`, `park_name`,`park_price`, `status`,`picture`,`lng`,`lat`,`place`) values('$commu_name','$name','$price','1','$imageSrc','$lng','$lat','$place')";
             $result = mysqli_query($hand, $sql);
         }
