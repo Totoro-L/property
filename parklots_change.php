@@ -7,7 +7,7 @@ switch ($_GET['action']) {
         check();//密码验证
         break;
     case 'change':
-        change();//级联选择小区
+        change();
         break;
     case 'delete':
         delete_d();
