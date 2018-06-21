@@ -39,13 +39,13 @@ function change()
     $park_name=$_POST["position"]["park_name"];
     switch ($_POST["position"]["flag"]) {
         case '1':
-            $sql_commu="select picture from parklots_info where park_name='$park_name' and user_name='$user'";
+            $sql_commu="select picture from parklots_info where park_name='$park_name'";
             $result_commu = mysqli_query($hand, $sql_commu);
             $row_commu = mysqli_fetch_array($result_commu);
-            $dan["picture"]=$row_commu["pic"];
+            $dan["picture"]=$row_commu["picture"];
             break;
         case '2':
-            $sql_de="update `parklots_info` set status='0' where park_name='$park_name' and user_name='$user'";
+            $sql_de="update `parklots_info` set status='0' where park_name='$park_name'";
             $result_de = mysqli_query($hand, $sql_de);
             if(!$result_de)
             {
@@ -58,7 +58,7 @@ function change()
             break;
         case '3':
             $price=$_POST["position"]["price"];
-            $sql_s="update `parklots` set park_price='$price' where park_name='$park_name' and user_name='$user'";
+            $sql_s="update `parklots_info` set park_price='$price' where park_name='$park_name'";
             $result_s = mysqli_query($hand, $sql_s);
             if(!$result_s)
             {
@@ -70,7 +70,7 @@ function change()
             }
             break;
         case '4':
-            $sql_de="update `parklots_info` set status='1' where park_name='$park_name' and user_name='$user'";
+            $sql_de="update `parklots_info` set status='1' where park_name='$park_name'";
             $result_de = mysqli_query($hand, $sql_de);
             if(!$result_de)
             {
@@ -99,5 +99,4 @@ function delete_d()
     {
         $dan["status"]='1';
     }
-    break;
 }

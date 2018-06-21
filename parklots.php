@@ -19,19 +19,19 @@ function check()
     global $hand;
     $user=$_SESSION["user"];
     $total=10;
-    $min=$_GET["jsonPage"]["currentPage"]*$total-10;
+    $min=$_POST["jsonPage"]["currentPage"]*$total-10;
     $count=0;
-    if($_GET["jsonPage"]["currentPage"]=1)
+    if($_POST["jsonPage"]["currentPage"]=1)
     {
-        $sql_n="select park_name from parklots_info where commu_name in (select commu_name from commu_info where user_name='$user')";
+        $sql_n="select id from parklots_info where commu_name in (select commu_name from commu_info where user_name='$user')";
         $result_n = mysqli_query($hand, $sql_n);
         $row_n = mysqli_fetch_assoc($result_n);
-        $allnum=count($row_commu);
+        $allnum=count($row_n);
         $allpage=ceil($allnum/10);
         $dan["ProNum"]=$allnum;
         $dan["PageNum"]=$allpage;
     }
-    $sql="select park_name,commu_name,price,lng,lat from parklots_info where commu_name in (select commu_name from commu_info where user_name='$user') limit $min,10";
+    $sql="select park_name,commu_name,park_price,lng,lat,status from parklots_info where commu_name in (select commu_name from commu_info where user_name='$user') limit $min,10";
     $result = mysqli_query($hand, $sql);
     while($row = mysqli_fetch_assoc($result))
     {
@@ -45,9 +45,11 @@ function check()
         $dan["$count"]["ParkNum"]=$num;
         $dan["$count"]["park_name"]=$park_name;
         $dan["$count"]["commu_name"]=$row["commu_name"];
-        $dan["$count"]["price"]=$row["price"];
+        $dan["$count"]["price"]=$row["park_price"];
+        $dan["$count"]["status"]=$row["status"];
         $count++;
     }
+      $dan["count"]=$count+1;
     echo json_encode($dan);
 }
 function choose()
@@ -79,7 +81,7 @@ function join_join()
     $lat=$_POST["position"]["lat"];
     $price=$_POST["position"]["price"];
     $place=$_POST["position"]["place"];
-    for($i=1;$i<=$num;$i++)
+    for($i=0;$i<$num;$i++)
     {
         $floor=$arr["$i"]["floor"];
         $image=$arr["$i"]["picture"];

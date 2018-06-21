@@ -43,16 +43,17 @@ function getData(currentPage){
 	getPush={
 		"jsonPage":getPush
 	};
+	console.log(getPush);
 	$.ajax({
 		type: "POST",  //数据提交方式（post/get）
 		url: '../parklots.php?action=check',  //提交到的url
 		data: getPush,//提交的数据
 		dataType: "json",//返回的数据类型格式
 		//cache: false,
-		processData: false,
-		contentType: "application/json",
+		//processData: false,
+		//contentType: "application/json",
 		success: function(ret){
-			console.log("返回数据是："+ret);
+			console.log(ret);
 			// alert("总数据数是："+ret.ProNum);
 			// alert(ret.length);
 			ret=JSON.stringify(ret);
@@ -81,7 +82,7 @@ function getData(currentPage){
 					 "<span id=\"span2\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>修改价格</span>"+
 					 "<span id=\"span1\"><img src=\"images/alarm.png\" width=\"18px\" height=\"18px\"/>暂停使用</span>"+
 					 "<span id=\"span4\"><img src=\"images/error.png\" width=\"18px\" height=\"18px\"/>删除</span></td>";
-					
+
 				}
 				tab+="<tr>";
 				tab+="<td>"+parseInt(i+1)+"</td>";
@@ -197,7 +198,7 @@ function pasCheck(some,name){
 						else if(some=="garRev"){ //修改（只有价格）
 							flag=3;
 						}
-						else if(some=="garDel"){ //修改（只有价格）
+						else if(some=="garDel"){ //shanchu
 							flag=5;
 						}
 						var updata={
@@ -229,14 +230,16 @@ function pasCheck(some,name){
 												'<button type="button" class="gar-pic-btn1">退出</button>'+
 												'<a id="down"><button type="button" class="gar-pic-btn2">下载</button></a>'+
 											'</div>';
-											
+
 									$(".gar-pic-floor").remove();
 									$(".gar-pic-btn").remove();
 									$(".pasCh").hide();
 									$(".gar-pic").show();
-									
+
 									$(".gar-pic h1").after(html);
-									$(".gar-pic-floor img").attr("src",ret.picture);
+									var srcPic="../"+ret.picture;
+									console.log(srcPic);
+									$(".gar-pic-floor img").attr("src",srcPic);
 									$(".gar-pic-btn1").click(function(){ //退出
 										$(".shade").hide();
 										$(".gar-pic").hide();
@@ -244,8 +247,9 @@ function pasCheck(some,name){
 									})
 									// 下载
 									$(".gar-pic-btn2").off("click").on("click",(function(){
-										$("#down").attr("href",ret.picture);
-										$("#down").attr("download",ret.picture);
+
+										$("#down").attr("href",srcPic);
+										$("#down").attr("download",srcPic);
 										$("#down").click();
 									}))
 								},
@@ -325,7 +329,11 @@ function pasCheck(some,name){
 							$.ajax({
 								type: "POST",  //数据提交方式（post/get）
 								url: '../parklots_change.php?action=delete',  //提交到的url
-								data:updata,//提交的数据
+								data:{
+									"position":{
+										"park_name":name
+									}
+								},//提交的数据
 								dataType: "json",//返回的数据类型格式
 								//cache: false,
 								//processData: false,
@@ -606,7 +614,7 @@ $(document).ready(function(){
 				'commu_name':garName,
 				'lng':$("#gar-Lng").val(),
 				'lat':$("#gar-Lat").val(),
-				'place':$("#gar").val(),
+				'place':$("#gar-pos-del").val(),
 				'price':$('.gar-money option:selected').val(),
 				'pictureSum':length,
 				'arr':arr
@@ -614,7 +622,14 @@ $(document).ready(function(){
 			//console.log(data);
 			data={
 				position:{
-					data
+					'park_name':$(".gar-name input").val()+"车库",
+					'commu_name':garName,
+					'lng':$("#gar-Lng").val(),
+					'lat':$("#gar-Lat").val(),
+					'place':$("#gar").val(),
+					'price':$('.gar-money option:selected').val(),
+					'pictureSum':length,
+					'arr':arr
 				}
 			}
 		//	data=JSON.stringify(data);
@@ -658,7 +673,7 @@ $(document).ready(function(){
 		console.log(name);
 		pasCheck("garPic",name);
 	});
-	$("#gar").find("td #span1").off("click").on("click",(function(){ 
+	$("#gar").find("td #span1").off("click").on("click",(function(){
 		var name=$(this).parent("td").siblings("#parkName").text();
 		var sta=$(this).parent("td").siblings("#parkStatus").text();
 		if(sta=="暂停使用"){ //恢复使用
@@ -673,7 +688,7 @@ $(document).ready(function(){
 		console.log(name);
 		pasCheck("garRev",name);
 	}));
-	$("#gar").find("td #span2").off("click").on("click",(function(){  //删除
+	$("#gar").find("td #span3").off("click").on("click",(function(){  //删除
 		var name=$(this).parent("td").siblings("#parkName").text();
 		console.log(name);
 		pasCheck("garDel",name);
