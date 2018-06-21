@@ -62,28 +62,32 @@ function getData(currentPage){
 			for(var i=0;i<ret.count-1;i++)
 			{
 				var imgAdd="<td><span id=\"span3\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>查看平面图</span>"+
-					 "<span id=\"span2\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>修改</span>"+
+					 "<span id=\"span2\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>修改价格</span>"+
 					 "<span id=\"span1\"><img src=\"images/error.png\" width=\"18px\" height=\"18px\"/>暂停使用</span></td>";
 				var position="东经："+ret[i].lng+"北纬："+ret[i].lat;
 				if(ret[i].status==0)
 				{
 					statusCec='暂停使用';
 					var imgAdd="<td><span id=\"span3\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>查看平面图</span>"+
-					 "<span id=\"span2\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>修改</span>"+
-					 "<span id=\"span1\"><img src=\"images/right.png\" width=\"18px\" height=\"18px\"/>暂停使用</span></td>";
+					 "<span id=\"span2\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>修改价格</span>"+
+					 "<span id=\"span1\"><img src=\"images/right.png\" width=\"18px\" height=\"18px\"/>恢复使用</span></td>";
 				}
 				else if(ret[i].status==1)
 				{
 					statusCec='使用中';
+					var imgAdd="<td><span id=\"span3\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>查看平面图</span>"+
+					 "<span id=\"span2\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>修改价格</span>"+
+					 "<span id=\"span1\"><img src=\"images/error.png\" width=\"18px\" height=\"18px\"/>暂停使用</span></td>";
+				
 				}
 				tab+="<tr>";
 				tab+="<td>"+parseInt(i+1)+"</td>";
 				tab+="<td class=\"gar-td-width\" id=\"parkName\"><a href=\"#\">"+ret[i].park_name+"</a></td>"+
 					 "<td class=\"gar-td-width\">"+ret[i].commu_name+"</td>"+
-					 "<td class=\"gar-td-width\">"+position+"</td>"+
+					 "<td class=\"gar-td-width2\">"+position+"</td>"+
 					 "<td>"+ret[i].price+"元/小时</td>"+
 					 "<td>"+ret[i].ParkNum+"</td>"+
-					 "<td>"+statusCec+"</td>"+
+					 "<td id=\"parkStatus\">"+statusCec+"</td>"+
 					 imgAdd;
 				tab+="</tr>";
 			}
@@ -152,7 +156,7 @@ function pasCheck(some,name){
 		$(".shade").hide();
 		$("body").css("overflow","scroll");
 	});
-	$(".pas-ok").click(function(){
+	$(".pas-ok").off("click").on("click",(function(){
 		if($("#pasCh-pass").val()==""){
 			alert("请输入密码！");
 		}
@@ -162,28 +166,32 @@ function pasCheck(some,name){
 					"password":$("#pasCh-pass").val()
 				}
 			}
+			console.log(pas);
 			//pas=JSON.stringify(pas);
 			$.ajax({
 				type: "POST",  //数据提交方式（post/get）
-				url: '../parklots.php?action=check',  //提交到的url
+				url: '../parklots_change.php?action=check',  //提交到的url
 				data:pas,//提交的数据
 				dataType: "json",//返回的数据类型格式
 				//cache: false,
 				//processData: false,
 				//contentType: "application/json",
 				success: function(ret){
-					console.log("返回的数据是："+ret);
+					console.log(ret);
 					//ret=JSON.stringify(ret);
 					//ret=JSON.parse(ret);
 					if(ret.result==1){     //密码正确
 						var flag;
-						if(some=="garPic"){
+						if(some=="garPic"){  //查看平面图
 							flag=1;
 						}
-						else if(some=="garPau"){
+						else if(some=="garPau"){ //暂停使用
 							flag=2;
 						}
-						else if(some=="garRev"){
+						else if(some=="garRe"){ //恢复使用
+							flag=4;
+						}
+						else if(some=="garRev"){ //修改（只有价格）
 							flag=3;
 						}
 						var updata={
@@ -192,48 +200,47 @@ function pasCheck(some,name){
 								"park_name":name
 							}
 						}
-						updata=JSON.stringify(updata);
+						///updata=JSON.stringify(updata);
+						console.log(updata);
 						if(flag==1)//查看平面图
 						{
 							$.ajax({
 								type: "POST",  //数据提交方式（post/get）
-								url: '../parklots.php?action=change',  //提交到的url
+								url: '../parklots_change.php?action=change',  //提交到的url
 								data:updata,//提交的数据
 								dataType: "json",//返回的数据类型格式
 								//cache: false,
 								//processData: false,
 								//contentType: "application/json",
 								success: function(ret){
-									console.log("返回的数据是："+ret);
+									console.log(ret);
 									ret=JSON.stringify(ret);
-									console.log("转为字符串后："+ret);
 									ret=JSON.parse(ret);
-									var html='<div class="gar-pic-floor">层数：'+
-											'<span></span>'+
+									var html='<div class="gar-pic-floor">车库名称：'+name+'<br/>'+
 											'<img class="gar-pic-floor" width="300px" height="200px"/>'+
-											'<button type="button">下载</button>'+
+											'</div>'+
+											'<div class="gar-pic-btn">'+
+												'<button type="button" class="gar-pic-btn1">退出</button>'+
+												'<a id="down"><button type="button" class="gar-pic-btn2">下载</button></a>'+
 											'</div>';
+											
 									$(".gar-pic-floor").remove();
+									$(".gar-pic-btn").remove();
 									$(".pasCh").hide();
 									$(".gar-pic").show();
-
-									for(var i=0;i<ret.count-1;i++)
-									{
-										$(".gar-pic").append(html);
-										$(".gar-pic-floor span").html(ret[i].floor);
-										$(".gar-pic-floor img").attr("src",ret[i].picture);
-									}
-									$(".gar-pic-btn1").click(function(){
+									
+									$(".gar-pic h1").after(html);
+									$(".gar-pic-floor img").attr("src",ret.picture);
+									$(".gar-pic-btn1").click(function(){ //退出
 										$(".shade").hide();
 										$(".gar-pic").hide();
 										$("body").css("overflow","scroll");
 									})
-									$(".gar-pic-floor button").off("click").on("click",(function(){
-										var $eleForm = $("<form method='get'></form>");
-										var download=$(this).siblings("img").attr("src");
-										$eleForm.attr("action",download);
-										$(document.body).append($eleForm);
-										$eleForm.submit();
+									// 下载
+									$(".gar-pic-btn2").off("click").on("click",(function(){
+										$("#down").attr("href",ret.picture);
+										$("#down").attr("download",ret.picture);
+										$("#down").click();
 									}))
 								},
 								error:function(XMLHttpRequest, textStatus, errorThrown){
@@ -243,21 +250,50 @@ function pasCheck(some,name){
 								}
 							});
 						}
+						else if(flag==4)//恢复使用
+						{
+							$.ajax({
+								type: "POST",  //数据提交方式（post/get）
+								url: '../parklots_change.php?action=change',  //提交到的url
+								data:updata,//提交的数据
+								dataType: "json",//返回的数据类型格式
+								//cache: false,
+								//processData: false,
+								//contentType: "application/json",
+								success: function(ret){
+									console.log(ret);
+									if(ret.status==1){
+										curPage=1;
+										finalPage=getData(1);
+										$(".shade").hide();
+										$(".pasCh").hide();
+										$("body").css("overflow","scroll");
+										alert("已恢复使用！");
+									}
+									else{
+										alert("恢复使用操作失败！");
+									}
+								},
+								error:function(XMLHttpRequest, textStatus, errorThrown){
+									alert(XMLHttpRequest.status);
+									alert(XMLHttpRequest.readyState);
+									alert(textStatus);
+								}
+							});
+
+						}
 						else if(flag==2)//暂停使用
 						{
 							$.ajax({
 								type: "POST",  //数据提交方式（post/get）
-								url: '../parklots.php?action=change',  //提交到的url
+								url: '../parklots_change.php?action=delete',  //提交到的url
 								data:updata,//提交的数据
 								dataType: "json",//返回的数据类型格式
 								//cache: false,
-								processData: false,
-								contentType: "application/json",
+								//processData: false,
+								//contentType: "application/json",
 								success: function(ret){
-									console.log("返回的数据是："+ret);
-									ret=JSON.stringify(ret);
-									console.log("转为字符串后："+ret);
-									ret=JSON.parse(ret);
+									console.log(ret);
 									if(ret.status==1){
 										curPage=1;
 										finalPage=getData(1);
@@ -278,116 +314,44 @@ function pasCheck(some,name){
 							});
 
 						}
-						else if(flag==3){//修改
+						else if(flag==3){//修改价格
 							$(".pasCh").hide();
 							$('.gar-rev-name input').val(name);
-							$(".gar-rev-div").remove();
-							var htmlRev;
-							htmlRev='<div class="gar-rev-div">层数：'+
-								'<input type="text" class="gar-rev-floor"/>F'+
-								'<input class="gar-rev-up" type="file"/>'+
-								'<div class="button">上传该层车库平面图</div>'+
-								'<input type="button" value="删除"/>'+
-							'</div>';
-							for(var i=0;i<ret.count-1;i++)
-							{
-								var imgRev='<img width="200px" height="100px" src="'+ret[i].picture+'"/>';
-								$(".gar-rev-pic").append(htmlRev);
-								$(".gar-rev-floor").val(ret[i].floor);
-								$(".gar-rev-div .button").html(imgRev);
-							}
+							$(".gar-rev-pic").remove();
 							$('.gar-revise').show();
-
-							$(".gar-rev-pic .rev-pic").off("click").on("click",(function(){
-								$(".gar-rev-pic").append(htmlRev);
-								$('.gar-rev-pic .gar-rev-div input[type="button"]').click(function(){
-									$(this).parent().remove();
-								});
-								var formNa="";
-								$(".gar-rev-pic .gar-rev-div .button").off("click").on("click",(function(){
-									var now=$(this).parent();
-									now.find('.gar-rev-up').click();
-									now.find('.gar-rev-up').change(function(){
-										formNa=$(this).val();
-										var FileSuf=formNa.lastIndexOf(".");
-										FileSuf=formNa.substring(FileSuf,formNa.length).toUpperCase();
-										if(FileSuf != ".JPG" && FileSuf != ".JPEG" && FileSuf != ".PNG"){
-											alert("文件格式错误！");
-											$(this).val("");
-										}
-										else{
-											var file = this.files[0];
-											var reader = new FileReader();
-											reader.readAsDataURL(file);
-											reader.onload = function(e){
-												formNa='<img width="200px" height="100px" src="'+this.result+'"/>';
-												now.find('.button').html(formNa);
-												//alert('base64编码是：'+this.result);
-											}
-										}
-									})
-								}));
-							}));
-							var relength=$(".gar-rev-pic").children(".gar-rev-div").relength;
-							var repicFlag=1;
-							var rearr=[];
-							for(var i=0;i<relength;i++)
-							{
-								var rethat=$(".gar-rev-pic").find(".gar-rev-div").eq(i);
-								var rebase=rethat.find("img").attr("src");
-								var refloor=rethat.find(".gar-rev-floor").val();
-								//alert(base);
-								rearr[rearr.relength]={
-									"floor":refloor,
-									"picture":rebase
-								};// 数组追加一个元素
-
-								if(!rebase){
-									repicFlag=0;
+							$(".gar-revise-btn1").click(function(){ //退出
+								$(".shade").hide();
+								$(".gar-revise").hide();
+								$("body").css("overflow","scroll");
+							})
+							$(".gar-revise-btn2").click(function(){ //提交
+								var dataRe={
+									"position":{
+										"flag":flag,
+										"park_name":name,
+										"price":$('.gar-rev-money option:selected').val()
+									}
 								}
-							}
-							if(relength==0){
-								alert("请添加车库平面图");
-							}
-							else if(refloor==""){
-								alert("请输入层数");
-							}
-							else if(!repicFlag){
-								alert("请添加正确的车库平面图");
-							}
-							else{
-								var data={
-									'price':$('.gar-rev-money option:selected').val(),
-									'pictureSum':relength,
-									'arr':rearr,
-									"flag":flag,
-									"park_name":name
-								}
-								data='{"position":'+data+'}'
-								//data=JSON.stringify(data);
-								console.log('传到后台的数据是：'+data);
 								$.ajax({
 									type: "POST",  //数据提交方式（post/get）
-									url: '../parklots.php?action=change',  //提交到的url
-									data: data,//提交的数据
+									url: '../parklots_change.php?action=change',  //提交到的url
+									data:dataRe,//提交的数据
 									dataType: "json",//返回的数据类型格式
 									//cache: false,
 									//processData: false,
 									//contentType: "application/json",
 									success: function(ret){
-										console.log('返回到前端的数据是：'+ret);
-										//ret=JSON.stringify(ret);
-										ret=JSON.parse(ret);
+										console.log(ret);
 										if(ret.status==1){
-											alert("提交成功");
 											curPage=1;
 											finalPage=getData(1);
 											$(".shade").hide();
 											$(".gar-revise").hide();
 											$("body").css("overflow","scroll");
+											alert("已修改价格！");
 										}
 										else{
-											alert("提交失败，请稍后重试！");
+											alert("修改价格操作失败！");
 										}
 									},
 									error:function(XMLHttpRequest, textStatus, errorThrown){
@@ -396,8 +360,7 @@ function pasCheck(some,name){
 										alert(textStatus);
 									}
 								});
-								return false;
-							}
+							})
 						}
 					}
 					else{
@@ -411,7 +374,7 @@ function pasCheck(some,name){
 				}
 			});
 		}
-	});
+	}));
 }
 
 var finalPage=1;
@@ -601,7 +564,7 @@ $(document).ready(function(){
 			var garName;
 			garName=$("#province1 option:selected").val()+$("#city1 option:selected").val()+$("#district1 option:selected").val()+$("#commu1 option:selected").val();
 			var data={
-				'park_name':$(".gar-name input").val(),
+				'park_name':$(".gar-name input").val()+"车库",
 				'commu_name':garName,
 				'lng':$("#gar-Lng").val(),
 				'lat':$("#gar-Lat").val(),
@@ -610,9 +573,10 @@ $(document).ready(function(){
 				'pictureSum':length,
 				'arr':arr
 			}
+			//console.log(data);
 			data='{"position":'+data+'}';
 		//	data=JSON.stringify(data);
-			console.log('传到后台的数据是：'+data);
+			console.log(data);
 			$.ajax({
 				type: "POST",  //数据提交方式（post/get）
 				url: '../parklots.php?action=join',  //提交到的url
@@ -649,14 +613,22 @@ $(document).ready(function(){
 		//操作
 	$("#gar td #span3").click(function(){  //查看平面图
 		var name=$(this).parent("td").siblings("#parkName").text();
+		console.log(name);
 		pasCheck("garPic",name);
 	});
-	$("#gar td #span1").click(function(){  //暂停使用
+	$("#gar").find("td #span1").off("click").on("click",(function(){ 
 		var name=$(this).parent("td").siblings("#parkName").text();
-		pasCheck("garPau",name);
-	});
-	$("#gar td #span2").click(function(){  //修改
+		var sta=$(this).parent("td").siblings("#parkStatus").text();
+		if(sta=="暂停使用"){ //恢复使用
+			pasCheck("garRe",name);
+		}
+		else{ //暂停使用
+			pasCheck("garPau",name);
+		}
+	}));
+	$("#gar").find("td #span2").off("click").on("click",(function(){  //修改
 		var name=$(this).parent("td").siblings("#parkName").text();
+		console.log(name);
 		pasCheck("garRev",name);
-	});
+	}));
 });
