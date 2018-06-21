@@ -63,22 +63,25 @@ function getData(currentPage){
 			{
 				var imgAdd="<td><span id=\"span3\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>查看平面图</span>"+
 					 "<span id=\"span2\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>修改价格</span>"+
-					 "<span id=\"span1\"><img src=\"images/error.png\" width=\"18px\" height=\"18px\"/>暂停使用</span></td>";
+					 "<span id=\"span1\"><img src=\"images/alarm.png\" width=\"18px\" height=\"18px\"/>暂停使用</span>"+
+					 "<span id=\"span4\"><img src=\"images/error.png\" width=\"18px\" height=\"18px\"/>删除</span></td>";
 				var position="东经："+ret[i].lng+"北纬："+ret[i].lat;
 				if(ret[i].status==0)
 				{
 					statusCec='暂停使用';
 					var imgAdd="<td><span id=\"span3\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>查看平面图</span>"+
 					 "<span id=\"span2\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>修改价格</span>"+
-					 "<span id=\"span1\"><img src=\"images/right.png\" width=\"18px\" height=\"18px\"/>恢复使用</span></td>";
+					 "<span id=\"span1\"><img src=\"images/right.png\" width=\"18px\" height=\"18px\"/>恢复使用</span>"+
+					 "<span id=\"span4\"><img src=\"images/error.png\" width=\"18px\" height=\"18px\"/>删除</span></td>";
 				}
 				else if(ret[i].status==1)
 				{
 					statusCec='使用中';
 					var imgAdd="<td><span id=\"span3\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>查看平面图</span>"+
 					 "<span id=\"span2\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>修改价格</span>"+
-					 "<span id=\"span1\"><img src=\"images/error.png\" width=\"18px\" height=\"18px\"/>暂停使用</span></td>";
-				
+					 "<span id=\"span1\"><img src=\"images/alarm.png\" width=\"18px\" height=\"18px\"/>暂停使用</span>"+
+					 "<span id=\"span4\"><img src=\"images/error.png\" width=\"18px\" height=\"18px\"/>删除</span></td>";
+					
 				}
 				tab+="<tr>";
 				tab+="<td>"+parseInt(i+1)+"</td>";
@@ -86,7 +89,7 @@ function getData(currentPage){
 					 "<td class=\"gar-td-width\">"+ret[i].commu_name+"</td>"+
 					 "<td class=\"gar-td-width2\">"+position+"</td>"+
 					 "<td>"+ret[i].price+"元/小时</td>"+
-					 "<td>"+ret[i].ParkNum+"</td>"+
+					 "<td class=\"gar-td-width3\">"+ret[i].ParkNum+"</td>"+
 					 "<td id=\"parkStatus\">"+statusCec+"</td>"+
 					 imgAdd;
 				tab+="</tr>";
@@ -194,6 +197,9 @@ function pasCheck(some,name){
 						else if(some=="garRev"){ //修改（只有价格）
 							flag=3;
 						}
+						else if(some=="garDel"){ //修改（只有价格）
+							flag=5;
+						}
 						var updata={
 							"position":{
 								"flag":flag,
@@ -286,7 +292,7 @@ function pasCheck(some,name){
 						{
 							$.ajax({
 								type: "POST",  //数据提交方式（post/get）
-								url: '../parklots_change.php?action=delete',  //提交到的url
+								url: '../parklots_change.php?action=change',  //提交到的url
 								data:updata,//提交的数据
 								dataType: "json",//返回的数据类型格式
 								//cache: false,
@@ -304,6 +310,38 @@ function pasCheck(some,name){
 									}
 									else{
 										alert("暂停使用操作失败！");
+									}
+								},
+								error:function(XMLHttpRequest, textStatus, errorThrown){
+									alert(XMLHttpRequest.status);
+									alert(XMLHttpRequest.readyState);
+									alert(textStatus);
+								}
+							});
+
+						}
+						else if(flag==5)//删除
+						{
+							$.ajax({
+								type: "POST",  //数据提交方式（post/get）
+								url: '../parklots_change.php?action=delete',  //提交到的url
+								data:updata,//提交的数据
+								dataType: "json",//返回的数据类型格式
+								//cache: false,
+								//processData: false,
+								//contentType: "application/json",
+								success: function(ret){
+									console.log(ret);
+									if(ret.status==1){
+										curPage=1;
+										finalPage=getData(1);
+										$(".shade").hide();
+										$(".pasCh").hide();
+										$("body").css("overflow","scroll");
+										alert("已删除！");
+									}
+									else{
+										alert("删除操作失败！");
 									}
 								},
 								error:function(XMLHttpRequest, textStatus, errorThrown){
@@ -630,5 +668,10 @@ $(document).ready(function(){
 		var name=$(this).parent("td").siblings("#parkName").text();
 		console.log(name);
 		pasCheck("garRev",name);
+	}));
+	$("#gar").find("td #span2").off("click").on("click",(function(){  //删除
+		var name=$(this).parent("td").siblings("#parkName").text();
+		console.log(name);
+		pasCheck("garDel",name);
 	}));
 });
