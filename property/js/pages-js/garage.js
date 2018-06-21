@@ -606,13 +606,17 @@ $(document).ready(function(){
 				'commu_name':garName,
 				'lng':$("#gar-Lng").val(),
 				'lat':$("#gar-Lat").val(),
-				//'place':
+				'place':$("#gar").val(),
 				'price':$('.gar-money option:selected').val(),
 				'pictureSum':length,
 				'arr':arr
 			}
 			//console.log(data);
-			data='{"position":'+data+'}';
+			data={
+				position:{
+					data
+				}
+			}
 		//	data=JSON.stringify(data);
 			console.log(data);
 			$.ajax({
