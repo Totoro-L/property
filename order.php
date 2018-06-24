@@ -1,23 +1,27 @@
 <?php
 include 'needauth.php';
 $total=10;
-$min=$_GET["jsonPage"]["currentPage"]*$total-10;
+$min=$_POST["jsonPage"]["currentPage"]*$total-10;
 $user=$_SESSION["user"];
 $hand = mysqli_connect("$db_host", "$db_user", "$db_pwd") or die('数据库连接失败');
 mysqli_select_db($hand, "$db_name") or die('数据库无此库');
 if($_POST["jsonPage"]["currentPage"]=1)
 {
-    $sql_n="select id from order_info where commu_name in (select commu_name from commu_info where user_name='$user')";
+    $sql_n="select count(id) from order_info where commu_name in (select commu_name from commu_info where user_name='$user')";
     $result_n = mysqli_query($hand, $sql_n);
-    $row_n = mysqli_fetch_assoc($result_n);
-    $allnum=count($row_n);
+    $row_n = mysqli_fetch_array($result_n);
+    $allnum=$row_n[0];
     $allpage=ceil($allnum/10);
     $dan["ProNum"]=$allnum;
     $dan["PageNum"]=$allpage;
 }
-$sql="select car_number, commu_name, park_name, park_number, ordertime, reservetime, latesttime, outtime, canceltime, orderstatus from order_info where commu_name in (select commu_name from commu_info where user_name='$user') limit $min,10";
-$result= mysqli_query($hand, $sql);
 $count=0;
+$sql="select car_number,commu_name,park_name,park_number,ordertime,reservetime,latesttime,outtime,canceltime,orderstatus from order_info where commu_name in (select commu_name from commu_info where user_name='$user') limit $min,10";
+$result= mysqli_query($hand, $sql);
+if (!$result) {
+ printf("Error: %s\n", mysqli_error($hand));
+ exit();
+}
 while ($row= mysqli_fetch_assoc($result)) {
     $dan["$count"]["commu_name"]=$row["commu_name"];
     $dan["$count"]["parkName"]=$row["park_name"];

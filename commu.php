@@ -10,10 +10,10 @@ $result = mysqli_query($hand, $sql);
 $row = mysqli_fetch_assoc($result);
 if($row["group"]==2)
 {
-  $sql_commu="select commu_name,status from commu_info where user_name='$user'";
+  $sql_commu="select count(id) from commu_info where user_name='$user'";
   $result_commu = mysqli_query($hand, $sql_commu);
-  $row_commu = mysqli_fetch_assoc($result_commu);
-  $num=count($row_commu);
+  $row_commu = mysqli_fetch_array($result_commu);
+  $num=$row_commu[0];
   $page=ceil($num/10);
   $sql_s="select commu_name,status from commu_info where user_name='$user' limit $min,10";
   $result_s = mysqli_query($hand, $sql_s);

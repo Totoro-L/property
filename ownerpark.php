@@ -21,14 +21,14 @@ function all()
     global $hand;
     $user=$_SESSION["user"];
     $total=10;
-    $min=$_GET["jsonPage"]["currentPage"]*$total-10;
+    $min=$_POST["jsonPage"]["currentPage"]*$total-10;
     $count=0;
     if($_GET["jsonPage"]["currentPage"]=1)
     {
-        $sql_n="select id from onwerpark_info where commu_name in (select commu_name from commu_info where user_name='$user')";
+        $sql_n="select count(*) from ownerpark_info where commu_name in (select commu_name from commu_info where user_name='$user')";
         $result_n = mysqli_query($hand, $sql_n);
-        $row_n = mysqli_fetch_assoc($result_n);
-        $allnum=count($row_commu);
+        $row_n = mysqli_fetch_array($result_n);
+        $allnum=$row_n[0];
         $allpage=ceil($allnum/10);
         $dan["ProNum"]=$allnum;
         $dan["PageNum"]=$allpage;
