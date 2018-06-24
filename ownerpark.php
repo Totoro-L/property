@@ -12,6 +12,9 @@ switch ($_GET['action']) {
     case 'check':
         check();
         break;
+    case 'join':
+        join_join();
+        break;
 }
 function all()
 {
@@ -90,6 +93,55 @@ function check()
         {
             $dan["result"]='1';
         }
+    }
+    echo json_encode($dan);
+}
+function join_join()
+{
+    global $hand;
+    $user=$_SESSION["user"];
+    $commu_name=$_POST["position"]["commu_name"];
+    $park_name=$_POST["position"]["park_name"];
+    $sharetime=$_POST["position"]["sharetime"];
+    $starttime=$_POST["position"]["starttime"];
+    $endtime=$_POST["position"]["endtime"];
+    $sql_p="select cellphone from user_info where user_name='$user'";
+    $result_p = mysqli_query($hand, $sql_p);
+    $row_p = mysqli_fetch_assoc($result_p);
+    $cellphone=$row_p["cellphone"];
+    $image=$_POST["position"]["picture"];
+    $imageName = $user.date('Ymdhis')."_".rand(1111,9999).'.txt';
+    if (strstr($image,",")){
+        $image = explode(',',$image);
+        $image = $image[1];
+    }
+
+    $path = "pic/".date("Ymd",time());
+    if (!is_dir($path)){ //判断目录是否存在 不存在就创建
+        mkdir($path,0777,true);
+    }
+    $imageSrc=  $path."/". $imageName;  //图片名字
+
+    $r = file_put_contents($imageSrc, base64_decode($image));//返回的是字节数
+    if (!$r) {
+        $dan["status"]='0';
+    }else{
+        $myfile = fopen("class.txt", "r") or die("Unable to open file!");
+        while(!feof($myfile))
+        {
+            $class=fgets($myfile);//按行读取
+            $class=trim($class);//去除换行符
+            $sql="insert into ownerpark_info(`commu_name`,`park_name`,`park_number`,`cellphone`,`park_img`,`sharetime`,`starttime`,`endtime`)values('$commu_name','$park_name','$class','$cellphone','pic/theone.jpg','$sharetime','$starttime','$endtime')";
+            $result = mysqli_query($hand, $sql);
+            if(!$result)
+            {
+                $dan["result"]='0';
+            }
+        }
+    }
+    if($dan["result"]!='0')
+    {
+        $dan["result"]='1';
     }
     echo json_encode($dan);
 }
