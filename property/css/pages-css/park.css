@@ -86,7 +86,7 @@
 .pk-bottom{
 	margin-top:25px;
 	padding-left:400px;
-	
+
 }
 .pk-bottom button,.pk-bottom span{
 	display:inline-block;
@@ -145,7 +145,7 @@
 	height:540px;
 	background-color:white;
 	z-index:20;
-	/* display:none; */
+	display:none;
 }
 .pk-add-time{
 	margin-left:80px;

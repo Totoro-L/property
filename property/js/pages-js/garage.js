@@ -619,20 +619,6 @@ $(document).ready(function(){
 				'pictureSum':length,
 				'arr':arr
 			}
-			//console.log(data);
-			data={
-				position:{
-					'park_name':$(".gar-name input").val()+"车库",
-					'commu_name':garName,
-					'lng':$("#gar-Lng").val(),
-					'lat':$("#gar-Lat").val(),
-					'place':$("#gar").val(),
-					'price':$('.gar-money option:selected').val(),
-					'pictureSum':length,
-					'arr':arr
-				}
-			}
-		//	data=JSON.stringify(data);
 			console.log(data);
 			$.ajax({
 				type: "POST",  //数据提交方式（post/get）
@@ -645,7 +631,7 @@ $(document).ready(function(){
 				success: function(ret){
 					console.log('返回到前端的数据是：'+ret);
 					//ret=JSON.stringify(ret);
-					ret=JSON.parse(ret);
+					//ret=JSON.parse(ret);
 					if(ret.status==1){
 						alert("提交成功");
 						curPage=1;
@@ -673,7 +659,7 @@ $(document).ready(function(){
 		console.log(name);
 		pasCheck("garPic",name);
 	});
-	$("#gar").on("click","#span1",function(){ 
+	$("#gar").on("click","#span1",function(){
 		var name=$(this).parent("td").siblings("#parkName").text();
 		var sta=$(this).parent("td").siblings("#parkStatus").text();
 		if(sta=="暂停使用"){ //恢复使用

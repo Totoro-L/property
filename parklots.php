@@ -23,10 +23,10 @@ function check()
     $count=0;
     if($_POST["jsonPage"]["currentPage"]=1)
     {
-        $sql_n="select id from parklots_info where commu_name in (select commu_name from commu_info where user_name='$user')";
+        $sql_n="select count(id) from parklots_info where commu_name in (select commu_name from commu_info where user_name='$user')";
         $result_n = mysqli_query($hand, $sql_n);
-        $row_n = mysqli_fetch_assoc($result_n);
-        $allnum=count($row_n);
+        $row_n = mysqli_fetch_array($result_n);
+        $allnum=$row_n[0];
         $allpage=ceil($allnum/10);
         $dan["ProNum"]=$allnum;
         $dan["PageNum"]=$allpage;
@@ -36,10 +36,10 @@ function check()
     while($row = mysqli_fetch_assoc($result))
     {
         $park_name=$row["park_name"];
-        $sql_park="select id from ownerpark_info where park_name='$park_name' and parkstatus='0'";
+        $sql_park="select count(id) from ownerpark_info where park_name='$park_name' and parkstatus='0'";
         $result_park = mysqli_query($hand, $sql_park);
-        $row_park = mysqli_fetch_assoc($result);
-        $num=count($row_park);
+        $row_park = mysqli_fetch_array($result_park);
+        $num=$row_park[0];
         $dan["$count"]["lng"]=$row["lng"];
         $dan["$count"]["lat"]=$row["lat"];
         $dan["$count"]["ParkNum"]=$num;
