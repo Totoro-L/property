@@ -9,6 +9,29 @@
 	</select></span>
 	<span class="pk-check"><input type="text" placeholder="/搜索车位"/><a href="#"><img src="images/u118.png" width="28px" height="28px"></a></span>
 	<button class="pk-add" type="button">批量添加车位</button>
+	<div class="pk-choose2">
+		  <div data-toggle="distpicker">所属车库：
+			<span class="form-group">
+			  <select class="form-control" id="province1"></select>省
+			</span>
+			<span class="form-group">
+			  <select class="form-control" id="city1"></select>市
+			</span>
+			<span class="form-group">
+			  <select class="form-control" id="district1"></select>区
+			</span>
+			<span class="form-group">
+			  <select class="form-control" id="commu1">
+				<option>—— 小区 ——</option>
+			  </select>小区
+			</span>
+			<span class="form-group">
+			  <select class="form-control" id="commu1">
+				<option>—— 车库 ——</option>
+			  </select>车库
+			</span>
+		   </div>
+	</div>
 </div>
 <table id="pk">
 </table>
@@ -27,76 +50,66 @@
 	<span class="pk-bottom-del"></span>
 </div>
 <div class="pk-addth">
-	<h1>添加车库</h1>
-	<div id="add-pk">
-		<div class="pk-name">*车库名称：<input type="text"/></div>
-		<p>*所属小区：</p>
-		<div class="form-inline">
-		  <div data-toggle="distpicker">
-			<span class="form-group">
-			  <select class="form-control" id="province1"></select>省
-			</span>
-			<span class="form-group">
-			  <select class="form-control" id="city1"></select>市
-			</span>
-			<span class="form-group">
-			  <select class="form-control" id="district1"></select>区
-			</span>
-			<span class="form-group">
-			  <select class="form-control" id="commu1">
-				<option>—— 小区 ——<option>
-			  </select>小区
-			</span>
-			</div>
+	<h1>批量添加车位</h1>
+	<div class="pk-file">
+		<input type="file" id="pk-add-file" hidden="hidden"/>
+		<button>添加车位信息文件</button>
+		<span>请上传txt文件</span>
+	</div>
+	<div>
+		<div class="pk-add-time">起止时间：
+			<span id="calend" class="calend">选择开始日期</span>
+			<span id="calend1" class="calend">选择结束日期</span>
 		</div>
-		<div class="pk-position">*详细地址：
-			<button type="button">选择车库位置</button>
-			<p>
-			北纬：<input type="text" class="lng" disabled="disabled" value="123‘我"/>&nbsp东经：<input type="text" class="lat" disabled="disabled"/>
-			</p>
-		</div>
-		<div class="pk-money">*价格：<select>
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			</select>元/小时
-		</div>
-		<div class="pk-filediv">*上传车库平面图：<button type="button">添加车库层数及平面图</button>
-			<div id="pk-upbtn">层数：
-				<select>
-					<option>3F</option>
-					<option>2F</option>
-					<option>1F</option>
-					<option>-1F</option>
-					<option>-2F</option>
-					<option>-3F</option>
-				</select>
-				<input id="pk-upfile" type="file"/>
-				<button type="button">上传该层车库平面图</button>
-				<span></span>
-			</div>
-		</div>
-		<div class="pk-btn">
-			<button type="button" class="pk-btn1">退出</button>
-			<button type="button" class="pk-btn2">提交</button>
-		</div>
+		<div class="pk-add-time">共享时间段：<select>
+			<option>8:00-10:00</option>
+			<option>10:00-12:00</option>
+			<option>12:00-14:00</option>
+			<option>14:00-16:00</option>
+			<option>16:00-18:00</option>
+		</select></div>
+		<div class="pk-add-time" id="pk-add-com">小区名称：<select>
+			<option>**小区</option>
+			<option>**小区</option>
+			<option>**小区</option>
+			<option>**小区</option>
+			<option>**小区</option>
+		</select></div>
+		<div class="pk-add-time" id="pk-add-pk">车库名称：<select>
+			<option>**车库</option>
+			<option>**车库</option>
+			<option>**车库</option>
+			<option>**车库</option>
+			<option>**车库</option>
+		</select></div>
+	</div>
+	<div class="pk-btn">
+		<button type="button" class="pk-btn1">退出</button>
+		<button type="button" class="pk-btn2">提交</button>
 	</div>
 </div>
 <div class="pk-revise">
-	<h1>修改小区上传凭证</h1>
-	<div class="pk-revise-name">小区名称：<input type="text" disabled="disabled"/></div>
-	<div class="pk-revise-file">
-		<input id="pk-revise-upfile" type="file" hidden="hidden"/>
-		<button type="button">上传新的凭证文件</button><br/>
-		<span></span>
+	<h1>查看凭证图片</h1>
+	<div class="pk-revise-img">
+		<img id="park-check-img" width="620px" height="400px"/>
 	</div>
 	<div class="pk-revise-btn">
 		<button type="button" class="pk-revise-btn1">退出</button>
-		<button type="button" class="pk-revise-btn2">提交</button>
+		<a id="park-img-down"><button type="button" class="pk-revise-btn2">下载</button></a>
+	</div>
+</div>
+<div class="pk-error">
+	<h1>填写失败原因</h1>
+	<div class="pk-error-reason">
+		<textarea rows="10" cols="50" placeholder="请填写审核失败原因"></textarea>
+	</div>
+	<div class="pk-error-btn">
+		<button type="button" class="pk-error-btn1">退出</button>
+		<button type="button" class="pk-error-btn2">确认</button>
 	</div>
 </div>
 </div>
 <script src="js/distpicker.data.js"></script>
 <script src="js/distpicker.js"></script>
+<script src="js/pages-js/day-select.js"></script>
 <script src="js/pages-js/park.js"></script>

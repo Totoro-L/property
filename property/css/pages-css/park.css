@@ -4,12 +4,13 @@
 }
 .pk-title span,.pk-title button{
 	display:inline-block;
-	margin-left:50px;
+	margin-left:70px;
 }
 .pk-check input{
 	width:260px;
 	height:28px;
 	font-size:15px;
+	margin-left:30px;
 }
 .pk-check img{
 	vertical-align:middle;
@@ -22,6 +23,7 @@
 	font-size:15px;
 }
 .pk-title button{
+	margin-left:100px;
 	width:140px;
 	height:40px;
 	border:none;
@@ -29,7 +31,18 @@
 	font-size:18px;
 	color:white;
 }
-
+.pk-choose2{
+	margin-left:50px;
+	margin-top:10px;
+}
+.pk-choose2 select{
+	width:150px;
+	height:25px;
+	font-size:15px;
+}
+.pk-choose2 span{
+	margin:0;
+}
 #pk{
 	margin-top:22px;
 	border-collapse:collapse;
@@ -67,7 +80,7 @@
 	border:none;
 }
 .pk-td-width{
-	width:190px;
+	width:170px;
 }
 
 .pk-bottom{
@@ -127,13 +140,16 @@
 	top:50%;
 	left:50%;
 	margin-left:-350px;
-	margin-top:-250px;
+	margin-top:-300px;
 	width:700px;
-	height:500px;
+	height:540px;
 	background-color:white;
 	z-index:20;
-	display:none;
-	overflow:scroll;
+	/* display:none; */
+}
+.pk-add-time{
+	margin-left:80px;
+	margin-top:20px;
 }
 .pk-addth h1{
 	font-size:28px;
@@ -144,91 +160,24 @@
 	padding-bottom:8px;
 	border-bottom:2px solid #4b99cb;
 }
-.pk-name,.pk-position,.pk-money{
-	padding-left:60px;
-	margin-top:22px;
-	font-size:16px;
+.pk-file{
+	text-align:center;
+	margin:40px auto;
 }
-.pk-name input{
-	width:260px;
-	height:20px;
-	font-size:14px;
-}
-#add-pk p{
-	margin:22px auto 12px 60px;
-	font-size:16px;
-}
-#park .form-inline{
-	padding-left:60px;
-	font-size:16px;
-}
-#park .form-inline select{
-	height:30px;
-	font-size:14px;
-}
-.pk-position p{
-	margin-top:22px;
-	text-align:left;
-}
-.pk-position input{
-	width:100px;
-	height:20px;
-	font-size:14px;
-	background-color:white;
-	border:none;
-}
-.pk-position button{
-	width:100px;
-	height:30px;
+.pk-file button{
 	background-color:#4b99cb;
-	color:white;
-	font-size:14px;
-	border:none;
-	border-radius:5px;
-}
-.pk-money select{
-	width:70px;
-	height:28px;
-	font-size:14px;
-}
-.pk-filediv{
-	margin-top:22px;
-	padding-left:60px;
-}
-.pk-filediv button{
-	width:180px;
-	height:30px;
-	background-color:#4b99cb;
-	color:white;
-	font-size:14px;
-	border:none;
-	border-radius:5px;
-}
-#pk-upbtn{
-	height:120px;
-	margin-top:12px;
-	margin-left:60px;
-	font-size:15px;
-}
-#pk-upbtn select{
-	width:50px;
-	height:30px;
-}
-#pk-upbtn button{
+	height:45px;
 	width:200px;
-	height:100px;
-	background-color:white;
-	color:#999;
-	font-size:14px;
-	border:1px dashed #999;
+	font-size:16px;
+	color:white;
+	border:none;
 	border-radius:5px;
-	margin-left:100px;
 }
-#pk-upbtn span{
+.pk-file span{
 	font-size:14px;
 }
 .pk-btn{
-	margin-top:22px;
+	margin-top:50px;
 	text-align:center;
 }
 .pk-btn button{
@@ -264,17 +213,18 @@
 .pk-revise{
 	display:none;
 	position:absolute;
-	width:500px;
-	height:300px;
+	width:700px;
+	height:500px;
 	border:1px solid #CCC;
 	top:50%;
 	left:50%;
 	text-align:center;
-	margin-left:-250px;
-	margin-top:-150px;
+	margin-left:-350px;
+	margin-top:-250px;
 	background-color:white;
 	overflow:hidden;
 	z-index:13;
+	overflow:scroll;
 }
 .pk-revise h1{
 	font-size:28px;
@@ -329,4 +279,280 @@
 }
 .pk-revise .pk-revise-btn button:first-child{
 	margin-right:50px;
+}
+
+.pk-error{
+	display:none;
+	position:absolute;
+	width:700px;
+	height:420px;
+	border:1px solid #CCC;
+	top:50%;
+	left:50%;
+	text-align:center;
+	margin-left:-350px;
+	margin-top:-210px;
+	background-color:white;
+	overflow:hidden;
+	z-index:13;
+}
+.pk-error h1{
+	font-size:28px;
+	color:#4b99cb;
+	margin:5px auto;
+	width:480px;
+	padding-left:25px;
+	padding-bottom:8px;
+	padding-top:15px;
+	border-bottom:2px solid #4b99cb;
+	margin-bottom:20px;
+}
+.pk-error textarea{
+	font-size:18px;
+	padding:10px;
+}
+.pk-error-btn{
+	margin-top:30px;
+}
+.pk-error-btn button{
+	display:inline-block;
+	height:35px;
+	width:100px;
+	font-size:16px;
+	color:white;
+	background-color:#336699;
+	border:none;
+	border-radius:5px;
+}
+.pk-error-btn1{
+	margin-right:50px;
+}
+
+
+
+/* 时间选择 */
+.containter {
+	width:320px;
+	margin:auto
+}
+.calender-wrap {
+	-webkit-animation:clafade .3s ease;
+	-moz-animation:clafade .3s ease;
+	animation:clafade .3s ease;
+	padding:5px;
+	background:#fff;
+	width:240px;
+	box-shadow:0 5px 10px rgba(0,0,0,0.2);
+	border-radius:4px;
+	position:relative;
+	font-family:"Microsoft yahei";
+	position:absolute;
+	z-index:1000
+}
+.calender-wrap {
+	border:1px solid #e2e2e2
+}
+.calender-wrap:after {
+	content:'';
+	display:inline-block;
+	border-left:7px solid transparent;
+	border-right:7px solid transparent;
+	border-bottom:7px solid #eee;
+	border-top:0;
+	border-bottom-color:#d7d7d7;
+	position:absolute;
+	left:9px;
+	top:-7px
+}
+.calender-wrap:before {
+	content:'';
+	display:inline-block;
+	border-left:6px solid transparent;
+	border-right:6px solid transparent;
+	border-bottom:6px solid #ffffff;
+	border-top:0;
+	position:absolute;
+	left:10px;
+	top:-6px;
+	z-index:10
+}
+.calender-caption {
+	height:35px;
+	border-bottom:1px solid #ddd;
+	z-index:2;
+	background:#eee
+}
+.calender-content {
+	position:relative;
+	overflow:hidden
+}
+.calender-content:after {
+	content:'';
+	display:block;
+	clear:both
+}
+.calender-cell {
+	cursor:pointer;
+	float:left;
+	width:14.28571428%;
+	height:35px;
+	text-align:center;
+	line-height:35px;
+	font-size:12px;
+	color:#000;
+	z-index:1;
+	border-bottom:1px solid #eee
+}
+.calender-cell:hover {
+	background:#eee
+}
+.calender-caption .calender-cell:hover {
+	background:none
+}
+.calender-cell-dark {
+	cursor:no-drop;
+	color:#b9b9b9
+}
+.calender-caption .calender-cell {
+	height:35px;
+	line-height:35px;
+	font-size:13px;
+	color:#111;
+	font-weight:bold
+}
+.calender-header {
+	text-align:center;
+	line-height:35px;
+	text-align:center;
+	color:#888;
+	padding-bottom:4px;
+	margin-bottom:1px;
+	background:#fff;
+	position:relative;
+	border-bottom:1px solid #e6e6e6;
+	font-size:14px
+}
+#calender-prev,#calender-next {
+	text-decoration:none;
+	display:block;
+	width:14.2857%;
+	height:35px;
+	background:#fff;
+	position:absolute;
+	left:0%;
+	top:0px;
+	font-family:'宋体';
+	font-size:14px;
+	color:#555
+}
+#calender-prev,#calender-next {
+	color:#999;
+	font-size:16px
+}
+#calender-prev:hover,#calender-next:hover {
+	background:#eee;
+	border-radius:5px;
+	color:#222
+}
+#calender-next {
+	left:auto;
+	right:0%
+}
+#calender-year,#calender-mon {
+	cursor:pointer;
+	padding:2px 4px;
+	border-radius: 3px;
+	margin:0 3px;
+}
+#calender-year:hover,#calender-mon:hover {
+	background:#eee
+}
+.calender-list {
+	overflow:hidden
+}
+.calender-list2,.calender-list3 {
+	display:none
+}
+.calender-year-cell,.calender-mon-cell {
+	width:32.41%;
+	float:left;
+	border-radius:4px;
+	text-align:center;
+	font-size:12px;
+	padding:15px 0;
+	border:1px solid #fff
+}
+.calender-year-cell:hover,.calender-mon-cell:hover {
+	background:#eee;
+	cursor:pointer
+}
+.calender-cell.active,.calender-year-cell.active,.calender-mon-cell.active {
+	background:#23acf1;
+	color:#fff
+}
+.calender-cell.active:hover,.calender-year-cell.active:hover,.calender-mon-cell.active:hover {
+	background:#23acf1;
+	color:#fff
+}
+.calender-button {
+	border-top:1px solid #eee;
+	width:100%;
+	margin-top:-1px;
+	padding:7px 0px 2px 0;
+	overflow:hidden
+}
+.calender-button a {
+	display:block;
+	text-align:center;
+	padding:0px 15px;
+	height: 25px;
+	line-height: 25px;
+	float:right;
+	background:#23acf1;
+	color:#fff;
+	margin-right:5px;
+	cursor:pointer;
+	margin-left:5px;
+	font-size:12px;
+	text-decoration:none
+}
+.calender-button a:hover {
+	background:#0084c9
+}
+.calender-wrap.year .calender-list,.calender-wrap.month .calender-list {
+	display:none
+}
+.calender-wrap.year .calender-list2 {
+	display:block
+}
+.calender-wrap.month .calender-list3 {
+	display:block
+}
+@keyframes clafade {
+	0% {
+	transform:scale(0.95);
+	opacity:0
+}
+100% {
+	transform:scale(1);
+	opacity:1
+}
+}@-webkit-keyframes clafade {
+	0% {
+	-webkit-transform:scale(0.95);
+	opacity:0
+}
+100% {
+	-webkit-transform:scale(1);
+	opacity:1
+}
+}	.calend {
+	display:inline-block;
+	width: 180px;
+	line-height: 28px;
+	background: #4b99cb;
+	color:#fff;
+	padding: 5px 12px;
+	margin:20px 20px 20px 0;
+	font-size: 14px;
 }

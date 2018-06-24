@@ -415,15 +415,15 @@ $(document).ready(function(){
 			return false;
 		}
 	});
-	$("#vla td #span3").click(function(){
+	$("#vla").on("click","#span3",function(){ 
 		var name=$(this).parent("td").siblings(".commu_name").text();
 		pasCheck("vlaFile",name);
 	});
-	$("#vla td #span1").click(function(){
+	$("#vla").on("click","#span1",function(){ 
 		var name=$(this).parent("td").siblings(".commu_name").text();
 		pasCheck("vlaDel",name);
 	});
-	$("#vla td #span2").click(function(){
+	$("#vla").on("click","#span2",function(){ 
 		var name=$(this).parent("td").siblings(".commu_name").text();
 		pasCheck("vlaRev",name);
 	});

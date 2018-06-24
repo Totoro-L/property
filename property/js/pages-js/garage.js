@@ -668,12 +668,12 @@ $(document).ready(function(){
 		}
 	});
 		//操作
-	$("#gar td #span3").click(function(){  //查看平面图
+	$("#gar").on("click","#span3",function(){   //查看平面图
 		var name=$(this).parent("td").siblings("#parkName").text();
 		console.log(name);
 		pasCheck("garPic",name);
 	});
-	$("#gar").find("td #span1").off("click").on("click",(function(){
+	$("#gar").on("click","#span1",function(){ 
 		var name=$(this).parent("td").siblings("#parkName").text();
 		var sta=$(this).parent("td").siblings("#parkStatus").text();
 		if(sta=="暂停使用"){ //恢复使用
@@ -682,15 +682,15 @@ $(document).ready(function(){
 		else{ //暂停使用
 			pasCheck("garPau",name);
 		}
-	}));
-	$("#gar").find("td #span2").off("click").on("click",(function(){  //修改
+	});
+	$("#gar").on("click","#span2",function(){  //修改
 		var name=$(this).parent("td").siblings("#parkName").text();
 		console.log(name);
 		pasCheck("garRev",name);
-	}));
-	$("#gar").find("td #span3").off("click").on("click",(function(){  //删除
+	});
+	$("#gar").on("click","#span4",function(){  //删除
 		var name=$(this).parent("td").siblings("#parkName").text();
 		console.log(name);
 		pasCheck("garDel",name);
-	}));
+	});
 });
