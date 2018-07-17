@@ -89,7 +89,7 @@ function delete_d()
     global $hand;
     $user=$_SESSION["user"];
     $park_name=$_POST["position"]["park_name"];
-    $sql_de="delete from parklots_info where park_name='$park_name' and user_name='$user'";
+    $sql_de="delete from parklots_info where park_name='$park_name' and commu_name in (select commu_name from commu_info where user_name ='$user')";
     $result_de = mysqli_query($hand, $sql_de);
     if(!$result_de)
     {
