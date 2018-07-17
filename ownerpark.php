@@ -83,7 +83,7 @@ function check()
     else if($so='0')
     {
         $reason=$_POST["position"]["reason"];
-        $sql="update `ownerpark_info` set parkstatus='0' and reason='$reason' where park_name='$park_name' and cellphone='$cell' and park_number='$park_number'";
+        $sql="update `ownerpark_info` set parkstatus='3', reason='$reason' where park_name='$park_name' and cellphone='$cell' and park_number='$park_number'";
         $result = mysqli_query($hand, $sql);
         if(!$result)
         {
