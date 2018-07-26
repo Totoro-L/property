@@ -1,0 +1,70 @@
+<div id="park">
+<div class="pro-title">
+	<span class="pro-choose1">审核状态：<select>
+		<option>全部</option>
+		<option>待审核</option>
+		<option>审核通过</option>
+		<option>审核失败</option>
+	</select></span>
+	<span class="pro-check"><input type="text" placeholder="/搜索物业"/><a href="#"><img src="images/u118.png" width="28px" height="28px"></a></span>
+	<button class="pro-add" type="button">添加物业</button>
+	
+</div>
+<table id="pro">
+</table>
+<div class="pro-bottom">
+	<button type="button" id="pro-first-page" class="pro-paging">首页</button>
+	<button type="button" id="pro-last-page" class="pro-paging">上一页</button>
+	<span class="pro-pag-div">
+		<input type="button" value="1" class="pro-pag"/>
+		<input type="button" value="2" class="pro-pag"/>
+		<input type="button" value="3" class="pro-pag"/>
+		<input type="button" value="4" class="pro-pag"/>
+		<input type="button" value="5" class="pro-pag"/>
+	</span>
+	<button type="button" id="pro-next-page" class="pro-paging">下一页</button>
+	<button type="button" id="pro-final-page" class="pro-paging">末页</button>
+	<span class="pro-bottom-del"></span>
+</div>
+<div class="pro-addth">
+	<h1>添加物业</h1>
+	<div id="add-pro">
+		<div class="pro-position">*用户名：
+			<input type="text" id="pro-name" placeholder="请输入用户名"/>
+		</div>
+		<div class="pro-position">*公司邮箱：
+			<input type="text" id="pro-mail" placeholder="请输入公司邮箱"/>
+		</div>
+		<div class="pro-position">*联系电话：
+			<input type="text" id="pro-call" placeholder="请输入联系电话"/>
+		</div>
+		<div class="pro-btn">
+			<button type="button" class="pro-btn1">退出</button>
+			<button type="button" class="pro-btn2">提交</button>
+		</div>
+	</div>
+</div>
+<div class="pro-revise">
+	<h1>查看凭证图片</h1>
+	<div class="pro-revise-img">
+		<img id="park-check-img" width="620px" height="400px"/>
+	</div>
+	<div class="pro-revise-btn">
+		<button type="button" class="pro-revise-btn1">退出</button>
+		<a id="park-img-down"><button type="button" class="pro-revise-btn2">下载</button></a>
+	</div>
+</div>
+<div class="pro-error">
+	<h1>填写失败原因</h1>
+	<div class="pro-error-reason">
+		<textarea rows="10" cols="50" placeholder="请填写审核失败原因"></textarea>
+	</div>
+	<div class="pro-error-btn">
+		<button type="button" class="pro-error-btn1">退出</button>
+		<button type="button" class="pro-error-btn2">确认</button>
+	</div>
+</div>
+</div>
+<script src="js/distpicker.data.js"></script>
+<script src="js/distpicker.js"></script>
+<script src="js/pages-js/pro.js"></script>

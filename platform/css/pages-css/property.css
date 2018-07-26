@@ -1,27 +1,29 @@
-/* 小区管理 */
-.ord-title{
+/* 物业管理 */
+.pro-title{
 	margin:0 auto;
 }
-.ord-title span,.ord-title button{
+.pro-title span,.pro-title button{
 	display:inline-block;
-	margin-left:50px;
+	margin-left:70px;
 }
-.ord-check input{
+.pro-check input{
 	width:260px;
 	height:28px;
 	font-size:15px;
+	margin-left:30px;
 }
-.ord-check img{
+.pro-check img{
 	vertical-align:middle;
 	position:relative;
 	left:5px;
 }
-.ord-choose1 select{
+.pro-choose1 select{
 	width:150px;
 	height:25px;
 	font-size:15px;
 }
-.ord-title button{
+.pro-title button{
+	margin-left:100px;
 	width:140px;
 	height:40px;
 	border:none;
@@ -29,116 +31,123 @@
 	font-size:18px;
 	color:white;
 }
-
-#ord{
+.pro-choose2{
+	margin-left:50px;
+	margin-top:10px;
+}
+.pro-choose2 select{
+	width:150px;
+	height:25px;
+	font-size:15px;
+}
+.pro-choose2 span{
+	margin:0;
+}
+#pro{
 	margin-top:22px;
 	border-collapse:collapse;
 	text-align:center;
 }
-#ord th{
+#pro th{
 	background-color:#4B99CB;
 	color:white;
 	font-weight:normal;
 	font-size:16px;
 }
-#ord th,#ord td{
+#pro th,#pro td{
 	padding:8px 10px;
 }
-#ord td{
+#pro td{
 	font-size:14px;
 	padding:7px 10px;
 	border:1px solid #797979;
 }
-#ord td span{
+#pro td span{
 	display:inline-block;
 }
-#ord td span:nth-child(2){
+#pro td span:nth-child(2){
 	margin-left:10px;
 }
-#ord td span:nth-child(3){
+#pro td span:nth-child(3){
 	margin-left:10px;
 }
-#ord td span img{
+#pro td span img{
 	vertical-align:middle;
 	position:relative;
 	right:2px;
 }
-#ord .space{
+#pro .space{
 	border:none;
 }
-.ord-td-width1{
-	width:190px;
-}
-.ord-td-width{
-	width:100px;
+.pro-td-width{
+	width:170px;
 }
 
-.ord-bottom{
+.pro-bottom{
 	margin-top:25px;
 	padding-left:400px;
 	
 }
-.ord-bottom button,.ord-bottom span{
+.pro-bottom button,.pro-bottom span{
 	display:inline-block;
 	vertical-align:bottom;
 }
-.ord-bottom button{
+.pro-bottom button{
 	border:none;
 }
-.ord-bottom-del{
+.pro-bottom-del{
 	margin-left:160px;
 	font-size:16px;
 }
-.ord-bottom .ord-paging{
+.pro-bottom .pro-paging{
 	height:28px;
 	background-color:#336699;
 	color:white;
 }
-.ord-paging-down{
+.pro-paging-down{
 	height:28px;
 	background-color:#ccc;
 	color:white;
 }
-.ord-bottom .ord-pag{
+.pro-bottom .pro-pag{
 	width:28px;
 	height:28px;
 	background-color:white;
 	border:1px solid #797979;
 }
-.ord-bottom .ord-pag:hover{
+.pro-bottom .pro-pag:hover{
 	background-color:#FFFFCC;
 }
-.ord-pag-div .ord-btn-active{
+.pro-pag-div .pro-btn-active{
 	background-color:#4B99CB;
 	color:white;
 	width:28px;
 	height:28px;
 	border:1px solid #797979;
 }
-#order button{
+#park button{
 	cursor:pointer;
 }
-.ord-pag-div{
+.pro-pag-div{
 	margin:auto 2px;
 	height:28px;
 	overflow:hidden;
 	/* width:159px; */
 }
 
-.ord-addth{
+.pro-addth{
 	position:absolute;
 	top:50%;
 	left:50%;
 	margin-left:-350px;
-	margin-top:-250px;
+	margin-top:-150px;
 	width:700px;
-	height:500px;
+	height:300px;
 	background-color:white;
 	z-index:20;
 	display:none;
-	overflow:scroll;
 }
-.ord-addth h1{
+.pro-addth h1{
 	font-size:28px;
 	color:#4b99cb;
 	text-align:left;
@@ -147,94 +156,27 @@
 	padding-bottom:8px;
 	border-bottom:2px solid #4b99cb;
 }
-.ord-name,.ord-position,.ord-money{
-	padding-left:60px;
-	margin-top:22px;
-	font-size:16px;
+.pro-file{
+	text-align:center;
+	margin:40px auto;
 }
-.ord-name input{
-	width:260px;
-	height:20px;
-	font-size:14px;
-}
-#add-ord p{
-	margin:22px auto 12px 60px;
-	font-size:16px;
-}
-#order .form-inline{
-	padding-left:60px;
-	font-size:16px;
-}
-#order .form-inline select{
-	height:30px;
-	font-size:14px;
-}
-.ord-position p{
-	margin-top:22px;
-	text-align:left;
-}
-.ord-position input{
-	width:100px;
-	height:20px;
-	font-size:14px;
-	background-color:white;
-	border:none;
-}
-.ord-position button{
-	width:100px;
-	height:30px;
+.pro-file button{
 	background-color:#4b99cb;
-	color:white;
-	font-size:14px;
-	border:none;
-	border-radius:5px;
-}
-.ord-money select{
-	width:70px;
-	height:28px;
-	font-size:14px;
-}
-.ord-filediv{
-	margin-top:22px;
-	padding-left:60px;
-}
-.ord-filediv button{
-	width:180px;
-	height:30px;
-	background-color:#4b99cb;
-	color:white;
-	font-size:14px;
-	border:none;
-	border-radius:5px;
-}
-#ord-upbtn{
-	height:120px;
-	margin-top:12px;
-	margin-left:60px;
-	font-size:15px;
-}
-#ord-upbtn select{
-	width:50px;
-	height:30px;
-}
-#ord-upbtn button{
+	height:45px;
 	width:200px;
-	height:100px;
-	background-color:white;
-	color:#999;
-	font-size:14px;
-	border:1px dashed #999;
+	font-size:16px;
+	color:white;
+	border:none;
 	border-radius:5px;
-	margin-left:100px;
 }
-#ord-upbtn span{
+.pro-file span{
 	font-size:14px;
 }
-.ord-btn{
+.pro-btn{
 	margin-top:22px;
 	text-align:center;
 }
-.ord-btn button{
+.pro-btn button{
 	display:inline-block;
 	height:35px;
 	width:100px;
@@ -244,42 +186,47 @@
 	border:none;
 	border-radius:5px;
 }
-.ord-btn button:first-child{
+.pro-btn button:first-child{
 	margin-right:50px;
 }
-.ord-addth #ord-upfile{
+.pro-addth #pro-upfile{
 	display:none;
 }
-#ord td a{
+.pro-position{
+	height:50px;
+	margin-left:30px;
+}
+#pro td a{
 	color:black;
 	text-decoration:none;
 }
-#ord td a:hover{
+#pro td a:hover{
 	text-decoration:underline;
 }
-#ord td span{
+#pro td span{
 	cursor:pointer;
 }
-#ord td span:hover{
+#pro td span:hover{
 	text-decoration:underline;
 }
 
-.ord-revise{
+.pro-revise{
 	display:none;
 	position:absolute;
-	width:500px;
-	height:300px;
+	width:700px;
+	height:500px;
 	border:1px solid #CCC;
 	top:50%;
 	left:50%;
 	text-align:center;
-	margin-left:-250px;
-	margin-top:-150px;
+	margin-left:-350px;
+	margin-top:-250px;
 	background-color:white;
 	overflow:hidden;
 	z-index:13;
+	overflow:scroll;
 }
-.ord-revise h1{
+.pro-revise h1{
 	font-size:28px;
 	color:#4b99cb;
 	margin:5px auto;
@@ -290,22 +237,22 @@
 	padding-top:15px;
 	border-bottom:2px solid #4b99cb;
 }
-.ord-revise .ord-revise-name{
+.pro-revise .pro-revise-name{
 	font-size:18px;
 	margin-top:30px;
 	padding-left:20px;
 	text-align:left;
 }
-.ord-revise .ord-revise-name input{
+.pro-revise .pro-revise-name input{
 	border:none;
 	font-size:16px;
 	background-color:white;
 	width:300px;
 }
-.ord-revise .ord-revise-file{
+.pro-revise .pro-revise-file{
 	margin-top:40px;
 }
-.ord-revise .ord-revise-file button{
+.pro-revise .pro-revise-file button{
 	width:200px;
 	height:38px;
 	background-color:#4b99cb;
@@ -314,13 +261,13 @@
 	border:none;
 	border-radius:5px;
 }
-.ord-revise .ord-revise-file  span{
+.pro-revise .pro-revise-file  span{
 	font-size:13px;
 }
-.ord-revise .ord-revise-btn{
+.pro-revise .pro-revise-btn{
 	margin-top:20px;
 }
-.ord-revise .ord-revise-btn button{
+.pro-revise .pro-revise-btn button{
 	display:inline-block;
 	height:35px;
 	width:100px;
@@ -330,6 +277,53 @@
 	border:none;
 	border-radius:5px;
 }
-.ord-revise .ord-revise-btn button:first-child{
+.pro-revise .pro-revise-btn button:first-child{
+	margin-right:50px;
+}
+
+.pro-error{
+	display:none;
+	position:absolute;
+	width:700px;
+	height:420px;
+	border:1px solid #CCC;
+	top:50%;
+	left:50%;
+	text-align:center;
+	margin-left:-350px;
+	margin-top:-210px;
+	background-color:white;
+	overflow:hidden;
+	z-index:13;
+}
+.pro-error h1{
+	font-size:28px;
+	color:#4b99cb;
+	margin:5px auto;
+	width:480px;
+	padding-left:25px;
+	padding-bottom:8px;
+	padding-top:15px;
+	border-bottom:2px solid #4b99cb;
+	margin-bottom:20px;
+}
+.pro-error textarea{
+	font-size:18px;
+	padding:10px;
+}
+.pro-error-btn{
+	margin-top:30px;
+}
+.pro-error-btn button{
+	display:inline-block;
+	height:35px;
+	width:100px;
+	font-size:16px;
+	color:white;
+	background-color:#336699;
+	border:none;
+	border-radius:5px;
+}
+.pro-error-btn1{
 	margin-right:50px;
 }

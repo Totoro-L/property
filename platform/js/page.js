@@ -1,5 +1,5 @@
 $(document).ready(function(){ 
-　　$.get("pages/village.html",function(data){
+　　$.get("pages/property.html",function(data){
 		$("#main-frame").html(data);
 		$(".nav li:first").addClass("active");
 　　}); 

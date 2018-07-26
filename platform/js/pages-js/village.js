@@ -52,21 +52,23 @@ function getData(currentPage){
 		var statusCec;
 		for(var i=0;i<ret.count-1;i++)
         {
-			var imgAdd="<td><span id=\"span3\"><img src=\"images/u30.png\" width=\"18px\" height=\"18px\"/>下载资质文件</span>"+
-				 "<span id=\"span2\"><img src=\"images/edit.png\" width=\"18px\" height=\"18px\"/>修改</span>"+
-				 "<span id=\"span1\"><img src=\"images/error.png\" width=\"18px\" height=\"18px\"/>删除</span></td>";
+			var imgAdd="<td><span id=\"span3\"><img src=\"images/u30.png\" width=\"18px\" height=\"18px\"/>下载凭证文件</span>"+
+				 "<span id=\"span2\"><img src=\"images/right.png\" width=\"18px\" height=\"18px\"/>审核通过</span>"+
+				 "<span id=\"span1\"><img src=\"images/error.png\" width=\"18px\" height=\"18px\"/>审核失败</span></td>";
 			if(ret[i].status==0)
 			{
-				statusCec='审核中';
+				statusCec='待审核';
 			}
 			else if(ret[i].status==1)
 			{
-				statusCec='审核通过';
-				imgAdd="<td><span id=\"span3\"><img src=\"images/u30.png\" width=\"18px\" height=\"18px\"/>下载资质文件</span></td>";
+				statusCec='审核成功';
+				imgAdd="<td><span id=\"span3\"><img src=\"images/u30.png\" width=\"18px\" height=\"18px\"/>下载凭证文件</span></td>";
 			}
 			else
 			{
 				statusCec='审核失败';
+				imgAdd="<td><span id=\"span3\"><img src=\"images/u30.png\" width=\"18px\" height=\"18px\"/>下载凭证文件</span>"+
+				 "<span id=\"span4\"><img src=\"images/error.png\" width=\"18px\" height=\"18px\"/>删除</span></td>";
 			}
             tab+="<tr>";
 			tab+="<td>"+parseInt(i+1)+"</td>";
@@ -135,170 +137,76 @@ function getData(currentPage){
 	return retPage;
 };
 function pasCheck(some,name){
-	$("#pasCh-pass").val("");
-	$(".pasCh").show();
-	$(".shade").show();
-	$("html,body").animate({scrollTop:"0"},1);
-	$("body").css("overflow","hidden");
-	$(".pas-back").click(function(){
-		$(".pasCh").hide();
-		$(".shade").hide();
-		$("body").css("overflow","scroll");
-	});
-	$(".pas-ok").off("click").click(function(){
-		if($("#pasCh-pass").val()==""){
-			alert("请输入密码！");
-		}
-		else{
+	if(some=="vlaPic"){  //查看车位凭证
+		$.ajax({
+			type: "POST",  //数据提交方式（post/get）
+			url: '../commu_admin.php?action=check',  //提交到的url
+			data: name,//提交的数据
+			dataType: "json",//返回的数据类型格式
+			success: function(ret){
+				console.log(ret);
+				var $eleForm = $("<form method='get'></form>");
+				$eleForm.attr("action",ret.pic);
+				$(document.body).append($eleForm);
+				$eleForm.submit();
+				$(".shade").hide();
+				$(".pasCh").hide();
+				$("body").css("overflow","scroll");
+			},
+			error:function(XMLHttpRequest, textStatus, errorThrown){
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
+			}
+		});
+	}
+	else if(some=="vlaCek1"){ //审核通过
+		console.log(name);
+		$.ajax({
+			type:"POST",
+			url:'../commu_admin.php?action=change',
+			data:name,
+			dataType:"json",
+			success:function(ret){
+				console.log(ret);
+				if(ret.result==1){
+					alert("已上传审核结果！");
+					finalPage=getData(1);
+					curPage=1;
+					$(".nav li:nth-child(1)").click();
+				}
+				else{
+					alert("审核操作失败，请稍后重试！");
+				}
+			},
+			error:function(XMLHttpRequest, textStatus, errorThrown){
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
+			}
+		})
+	}
+	else if(some=="vlaCek2"){ //审核失败
+			console.log(name);
+			
 			$.ajax({
-				type: "POST",  //数据提交方式（post/get）
-				url: '../commu_change.php?action=check',  //提交到的url
-				data: {"password":$("#pasCh-pass").val()},//提交的数据
-				dataType: "json",//返回的数据类型格式
-				success: function(ret){
+				type:"POST",
+				url:'../commu_admin.php?action=change',
+				data:name,
+				dataType:"json",
+				success:function(ret){
 					console.log(ret);
 					if(ret.result==1){
-						var flag;
-						if(some=="vlaFile"){
-							flag=1;
-						}
-						else if(some=="vlaDel"){
-							flag=2;
-						}
-						else if(some=="vlaRev"){
-							flag=3;
-						}
-						var updata={
-							"position":{
-								"flag":flag,
-								"commu_name":name
-							}
-						}
-						console.log(updata);
-						if(flag==1)//下载资质文件
-						{
-							$.ajax({
-								type: "POST",  //数据提交方式（post/get）
-								url: '../commu_change.php?action=change',  //提交到的url
-								data: updata,//提交的数据
-								dataType: "json",//返回的数据类型格式
-								success: function(ret){
-									console.log(ret);
-									$("#down-a-commu").attr("href",ret.proveSrc);
-									$("#down-a-commu").attr("download",ret.proveSrc);
-									$(".down-btn-commu").click();
-									$("#down-a-commu").removeAttr("href");
-									$("#down-a-commu").removeAttr("download");
-									$(".shade").hide();
-									$(".pasCh").hide();
-									$("body").css("overflow","scroll");
-								},
-								error:function(XMLHttpRequest, textStatus, errorThrown){
-									alert(XMLHttpRequest.status);
-									alert(XMLHttpRequest.readyState);
-									alert(textStatus);
-								}
-							});
-						}
-						else if(flag==2)//删除
-						{
-							$.ajax({
-								type: "POST",  //数据提交方式（post/get）
-								url: '../commu_change.php?action=change',  //提交到的url
-								data: updata,//提交的数据
-								dataType: "json",//返回的数据类型格式
-								cache: false,
-								processData: false,
-								contentType: false,
-								success: function(ret){
-									console.log(ret);
-									if(ret.status==1){
-										curPage=1;
-										finalPage=getData(1);
-										$(".shade").hide();
-										$(".pasCh").hide();
-										$("body").css("overflow","scroll");
-										alert("删除成功！");
-										$(".nav li:nth-child(1)").click();
-									}
-									else{
-										alert("删除失败，请稍后重试！");
-									}
-								},
-								error:function(XMLHttpRequest, textStatus, errorThrown){
-									alert(XMLHttpRequest.status);
-									alert(XMLHttpRequest.readyState);
-									alert(textStatus);
-								}
-							});
-						}
-						else if(flag==3){//修改资质文件
-							$(".vla-revise-name input").val(name);
-							$(".vla-revise-file span").html("（*支持pdf、doc、jpg、jpeg、gif、png格式）");
-							$(".vla-revise").show();
-							$(".vla-revise .vla-revise-file button").off("click").click(function(){
-								$("#vla-revise-upfile").click();
-								$("#vla-revise-upfile").change(function(){
-									$(".vla-revise-file span").html($("#vla-revise-upfile").val());
-								});
-							});
-							$(".vla-revise-btn1").click(function(){
-								$(".vla-revise").hide();
-								$(".shade").hide();
-								$(".pasCh").hide();
-								$("body").css("overflow","scroll");
-							});
-							$(".vla-revise-btn2").off("click").click(function(){
-								var formNa=$("#vla-revise-upfile").val();
-								var FileSuf=formNa.lastIndexOf(".");
-								FileSuf=formNa.substring(FileSuf,formNa.length).toUpperCase();
-								if(FileSuf != ".PDF" && FileSuf != ".DOC" && FileSuf != ".GIF" && FileSuf != ".JPG" && FileSuf != ".JPEG" && FileSuf != ".PNG"){
-									alert("文件格式错误！");
-								}
-								else{
-									var data=new FormData();
-									data.append("picture",$("#vla-revise-upfile")[0].files[0]);
-
-									data.append("flag",flag);
-									data.append("commu_name",name);
-
-									$.ajax({
-										type: "POST",  //数据提交方式（post/get）
-										url: '../commu_change.php?action=change',  //提交到的url
-										data:data,//提交的数据
-										dataType: "json",//返回的数据类型格式
-										cache: false,
-										processData: false,
-										contentType: false,
-										success: function(ret){
-											console.log('修改文件返回的数据是：'+ret);
-											console.log('修改文件转为字符串后是：'+JSON.stringify(ret));
-											if(ret.status==1){
-												alert("凭证文件修改成功！");
-												curPage=1;
-												finalPage=getData(1);
-												$(".shade").hide();
-												$(".vla-revise").hide();
-												$(".pasCh").hide();
-												$("body").css("overflow","scroll");
-												$(".nav li:nth-child(1)").click();
-											}
-											else{
-												alert("凭证文件修改失败，请稍后重试！");
-											}
-										},
-										error:function(XMLHttpRequest, textStatus, errorThrown){
-											alert(XMLHttpRequest.status);
-											alert(XMLHttpRequest.readyState);
-											alert(textStatus);
-										}
-									});
-								}
-							});
-						}
+						alert("已上传审核结果！");
+						finalPage=getData(1);
+						curPage=1;
+						$(".shade").hide();
+						$(".vla-error").hide();
+						$("body").css("overflow","scroll");
+						$(".nav li:nth-child(1)").click();
 					}
 					else{
-						alert("密码错误！");
+						alert("审核操作失败，请稍后重试！");
 					}
 				},
 				error:function(XMLHttpRequest, textStatus, errorThrown){
@@ -306,9 +214,36 @@ function pasCheck(some,name){
 					alert(XMLHttpRequest.readyState);
 					alert(textStatus);
 				}
-			});
-		}
-	});
+			})
+	}
+	else if(some=="delete"){    //删除
+			console.log(name);
+			
+			$.ajax({
+				type:"POST",
+				url:'../commu_admin.php?action=delete',
+				data:name,
+				dataType:"json",
+				success:function(ret){
+					console.log(ret);
+					// if(ret.result==1){
+						alert("已删除！");
+						$(".shade").hide();
+						$(".vla-error").hide();
+						$("body").css("overflow","scroll");
+						$(".nav li:nth-child(1)").click();
+					// }
+					// else{
+						// alert("删除操作失败，请稍后重试！");
+					// }
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
+				}
+			})
+	}
 }
 
 var finalPage=1;
@@ -420,16 +355,50 @@ $(document).ready(function(){
 			return false;
 		}
 	});
-	$("#vla").on("click","#span3",function(){ 
-		var name=$(this).parent("td").siblings(".commu_name").text();
-		pasCheck("vlaFile",name);
+	$("#vla").on("click","#span3",function(){//查看凭证照片
+		// num=$(this).parent("td").siblings("#park_number").text();
+		vlaName=$(this).parent("td").siblings(".commu_name").text();
+		// call=$(this).parent("td").siblings("#call").text();
+		name={
+			"position":{
+				"name":vlaName
+			}
+		}
+		pasCheck("vlaPic",name);
+	})
+	$("#vla").on("click","#span1",function(){  //审核失败
+		// num=$(this).parent("td").siblings("#park_number").text();
+		vlaName=$(this).parent("td").siblings(".commu_name").text();
+		// call=$(this).parent("td").siblings("#call").text();
+		name={
+			"position":{
+				"park_name":vlaName,
+				"flag":"0"
+			}
+		}
+		pasCheck("vlaCek2",name);
 	});
-	$("#vla").on("click","#span1",function(){ 
-		var name=$(this).parent("td").siblings(".commu_name").text();
-		pasCheck("vlaDel",name);
+	$("#vla").on("click","#span2",function(){  //审核通过
+		// num=$(this).parent("td").siblings("#park_number").text();
+		vlaName=$(this).parent("td").siblings(".commu_name").text();
+		// call=$(this).parent("td").siblings("#call").text();
+		name={
+			"position":{
+				"park_name":vlaName,
+				"flag":"1"
+			}
+		}
+		pasCheck("vlaCek1",name);
 	});
-	$("#vla").on("click","#span2",function(){ 
-		var name=$(this).parent("td").siblings(".commu_name").text();
-		pasCheck("vlaRev",name);
+	$("#vla").on("click","#span4",function(){  //删除
+		// num=$(this).parent("td").siblings("#park_number").text();
+		vlaName=$(this).parent("td").siblings(".commu_name").text();
+		// call=$(this).parent("td").siblings("#call").text();
+		name={
+			"position":{
+				"name":vlaName
+			}
+		}
+		pasCheck("delete",name);
 	});
 });

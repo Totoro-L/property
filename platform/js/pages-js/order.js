@@ -39,7 +39,7 @@ function getData(currentPage){
 	
 	$.ajax({
 		 type: "POST",  //数据提交方式（post/get）
-		 url: '../order.php',  //提交到的url
+		 url: '../order_admin.php',  //提交到的url
 		 data: getPush,//提交的数据
 		 dataType: "json",//返回的数据类型格式
 		 success: function(ret){

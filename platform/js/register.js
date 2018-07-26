@@ -80,15 +80,15 @@ $(document).ready(function(){
 				Check5=0;
 			}
 		});
-		// if(!Check1 ||!Check2 ||!Check3 ||!Check4 ||!Check5){
-			// alert("请输入完整正确的信息！");
-		// }
-		// else{
+		if(!Check1 ||!Check2 ||!Check3 ||!Check4 ||!Check5){
+			alert("请输入完整正确的信息！");
+		}
+		else{
 			$(".first").hide();
 			$(".second").show();
 			$("li:nth-child(2)").addClass("active1");
 			$("li:nth-child(2) div").addClass("active2");
-		// }
+		}
 	});
 	// 第二个 上一步
 	$(".two-last").click(function(){
